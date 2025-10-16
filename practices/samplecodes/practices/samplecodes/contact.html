@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact — AirLytic</title>
+
+  <!-- icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-7H9Wj6E5uUmtzBr8hjq3bE9U8uwgLM1u9bXEdqjhvTTscMRB1jW+E9by7D5cXv8Ht0szzUASoHK3IuA6hC/9+w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    :root{
+      --brand:#2b7fff;
+      --navy:#0f2a57;
+      --muted:#6b7280;
+      --card-bg:#fff;
+      --radius:14px;
+      --shadow: 0 10px 30px rgba(11,34,71,0.08);
+      --max-width:1180px;
+    }
+    *{box-sizing:border-box}
+    body{
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      margin:0; color:#111;
+      background: linear-gradient(180deg,#fbfdff 0%, #f7fbff 100%);
+      -webkit-font-smoothing:antialiased;
+      line-height:1.45;
+    }
+
+    /* Keep a header-container where Header.html will be injected */
+    #header-container{width:100%}
+
+    /* Hero / contact top (no Request A Demo here) */
+    .hero-top {
+      background: linear-gradient(180deg,#0b1a2a 0%, #06223b 100%);
+      color:#fff;
+      padding: 48px 20px 28px;
+      text-align: center;
+
+      /* ---- ADDED: small space between header and title ---- */
+      margin-top: 12px;
+      /* ---------------------------------------------------- */
+    }
+    .hero-top .container { max-width: var(--max-width); margin: 0 auto; }
+    .hero-top h1 { font-size:2rem; margin:0 0 8px; font-weight:800; }
+    .hero-top p { color: rgba(255,255,255,0.85); margin:0 auto 18px; max-width:900px; }
+
+    /* hero cards */
+    .hero-cards { max-width:var(--max-width); margin: 0 auto 20px; display:grid; grid-template-columns: repeat(3,1fr); gap:18px; padding: 0 20px; }
+    .hero-card { background: rgba(255,255,255,0.04); border-radius:12px; padding:20px; color:#eaf3ff; box-shadow: 0 10px 30px rgba(2,8,12,0.28); }
+    .hero-card h3{ margin:0 0 8px; color:#fff }
+    .hero-card p{ margin:0 0 12px; color:rgba(255,255,255,0.78) }
+    .hero-card .card-cta { padding:8px 12px; border-radius:999px; background:var(--brand); color:#fff; text-decoration:none; font-weight:700; }
+
+    /* Contact cards row */
+    .cards{
+      max-width:var(--max-width);
+      margin: 8px auto 32px;
+      display:grid;
+      grid-template-columns: repeat(4,1fr);
+      gap:18px;
+      padding: 0 20px;
+    }
+    .card{
+      background:var(--card-bg);
+      border-radius:12px;
+      padding:18px;
+      box-shadow:var(--shadow);
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      transition:transform .22s ease, box-shadow .22s ease;
+    }
+    .card .icon{
+      flex:0 0 56px;
+      height:56px;
+      width:56px;
+      border-radius:10px;
+      background:linear-gradient(180deg, rgba(43,127,255,0.12), rgba(43,127,255,0.04));
+      display:grid; place-items:center;
+      color:var(--brand);
+      font-size:20px;
+    }
+
+    /* Main layout */
+    .main{
+      max-width:var(--max-width);
+      margin: 20px auto 80px;
+      padding: 20px;
+      display:grid;
+      grid-template-columns: 1fr 440px;
+      gap:28px;
+      align-items:start;
+    }
+    .map-wrap{ background:var(--card-bg); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; min-height:360px; }
+    .map-iframe{ border:0; width:100%; height:100%; min-height:360px; }
+    .contact-form{ background:var(--card-bg); padding:22px; border-radius:var(--radius); box-shadow:var(--shadow); }
+    .btn{ display:inline-block; padding:12px 18px; border-radius:10px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; border:0; cursor:pointer; box-shadow:0 10px 28px rgba(43,127,255,0.12); }
+
+    /* Footer */
+    footer.footer{ margin-top:60px; padding:40px 20px; background:#08162f; color:#cfe3ff; }
+    footer .wrap{ max-width:var(--max-width); margin:0 auto; display:flex; gap:24px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap }
+    .copyright{ max-width:var(--max-width); margin:18px auto 40px; text-align:center; color:rgba(255,255,255,0.55); font-size:0.88rem }
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero-cards{ grid-template-columns:1fr }
+      .cards{ grid-template-columns: repeat(2,1fr) }
+      .main{ grid-template-columns:1fr; padding:20px }
+    }
+    @media (max-width:480px){
+      nav.main-nav a span { display:none; }
+    }
+
+    /* toast */
+    .toast{ position: fixed; left:50%; transform: translateX(-50%); bottom: 26px; background:#0f2a57; color:#fff; padding:12px 18px; border-radius:10px; opacity:0; pointer-events:none; transition: opacity .28s ease, transform .28s ease; z-index:2000; }
+    .toast.show{ opacity:1; transform: translateX(-50%) translateY(-6px); pointer-events:auto; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER WILL BE DYNAMICALLY INJECTED -->
+  <div id="header-container"></div>
+
+  <script>
+    async function loadHtmlWithScripts(url, containerSelector) {
+      try {
+        const res = await fetch(url, { cache: 'no-store' });
+        if (!res.ok) throw new Error('Failed to load ' + url + ' — ' + res.status);
+        const text = await res.text();
+        const temp = document.createElement('div');
+        temp.innerHTML = text;
+        const container = document.querySelector(containerSelector);
+        if (!container) throw new Error('Container not found: ' + containerSelector);
+
+        const scripts = [];
+        Array.from(temp.childNodes).forEach(node => {
+          if (node.tagName && node.tagName.toLowerCase() === 'script') {
+            scripts.push(node);
+          } else {
+            container.appendChild(node);
+          }
+        });
+
+        const nestedScripts = Array.from(container.querySelectorAll('script'));
+        nestedScripts.forEach(s => {
+          const clone = s.cloneNode(true);
+          scripts.push(clone);
+          s.parentNode && s.parentNode.removeChild(s);
+        });
+
+        for (const s of scripts) {
+          const src = s.getAttribute && s.getAttribute('src');
+          const type = s.getAttribute && s.getAttribute('type');
+          if (src) {
+            await new Promise((resolve, reject) => {
+              const ext = document.createElement('script');
+              if (type) ext.type = type;
+              ext.src = src;
+              ext.async = false;
+              ext.onload = resolve;
+              ext.onerror = () => reject(new Error('Failed to load script: ' + src));
+              document.head.appendChild(ext);
+            });
+          } else {
+            const inline = document.createElement('script');
+            if (type) inline.type = type;
+            inline.text = s.textContent || s.innerText || '';
+            document.body.appendChild(inline);
+            inline.remove();
+          }
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // load the header from Header.html (shared)
+    loadHtmlWithScripts('Header.html', '#header-container').catch(console.error);
+  </script>
+
+  <!-- Hero top (now without Request A Demo) -->
+  <section class="hero-top" role="region" aria-labelledby="contact-heading">
+    <div class="container">
+      <h1 id="contact-heading">Contact AirLytic</h1>
+      <p>See the invisible. Understand your air and reach out for support, partnerships, or data inquiries.</p>
+
+      <!-- (Request A Demo removed here) -->
+      <div style="height:10px;"></div>
+
+      <div class="hero-cards" role="list" aria-label="Contact options">
+        <div class="hero-card" role="listitem">
+          <h3>Sales</h3>
+          <p>Wondering if AirLytic is the right tool for your team? Chat with our sales team to see if there’s a fit.</p>
+          <a class="card-cta" href="mailto:sales@airlytic.com?subject=Sales%20Inquiry">Let's Chat</a>
+        </div>
+
+        <div class="hero-card" role="listitem">
+          <h3>Support</h3>
+          <p>Need a hand using AirLytic or managing your account? Get in touch with our support team.</p>
+          <a class="card-cta" href="mailto:support@airlytic.com?subject=Support%20Request">Get Support</a>
+        </div>
+
+        <div class="hero-card" role="listitem">
+          <h3>Partnerships</h3>
+          <p>We’re open to co-marketing with awesome partners. Drop us a note and our Partnerships team will circle back.</p>
+          <a class="card-cta" href="mailto:partners@airlytic.com?subject=Partnership%20Inquiry">Get In Touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact summary cards -->
+  <section class="cards" aria-label="Contact information">
+    <div class="card" role="article">
+      <div class="icon" aria-hidden="true"><i class="fas fa-map-marker-alt"></i></div>
+      <div>
+        <h4>Our Location</h4>
+        <p>Tagum City, Davao del Norte<br>Philippines</p>
+      </div>
+    </div>
+
+    <div class="card" role="article">
+      <div class="icon" aria-hidden="true"><i class="fas fa-phone"></i></div>
+      <div>
+        <h4>Phone Number</h4>
+        <p>+63 917 123 4567<br><small style="color:var(--muted)">Mon — Fri, 9:00 — 17:00</small></p>
+      </div>
+    </div>
+
+    <div class="card" role="article">
+      <div class="icon" aria-hidden="true"><i class="fas fa-envelope"></i></div>
+      <div>
+        <h4>Email Us</h4>
+        <p>support@airlytic.com<br><small style="color:var(--muted)">Expect reply within 1–2 business days</small></p>
+      </div>
+    </div>
+
+    <div class="card" role="article">
+      <div class="icon" aria-hidden="true"><i class="fas fa-clock"></i></div>
+      <div>
+        <h4>Working Hours</h4>
+        <p>Mon — Sat • 9:00 — 17:00<br>Sunday — Emergency support only</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map + Contact Form -->
+  <main class="main" aria-live="polite">
+    <div class="map-wrap" aria-label="Map showing AirLytic location">
+      <div class="map-top" style="padding:14px 18px; border-bottom:1px solid #f1f5f9;">
+        <div>
+          <strong>AirLytic (Tagum)</strong>
+          <div style="font-size:0.9rem; color:var(--muted)">Tagum City, Davao del Norte, Philippines</div>
+        </div>
+        <div style="font-size:0.9rem; color:var(--muted)"><i class="fas fa-map-pin"></i> View on map</div>
+      </div>
+
+      <iframe class="map-iframe"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31897.726057282743!2d125.7863!3d7.4478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32f91db1e2f0bbf3%3A0x9d4f27e1472a5545!2sTagum%20City%2C%20Davao%20del%20Norte!5e0!3m2!1sen!2sph!4v1697000000000!5m2!1sen!2sph"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="AirLytic location map - Tagum City"></iframe>
+    </div>
+
+    <aside class="contact-form" aria-labelledby="contact-form-heading">
+      <h3 id="contact-form-heading">Send us a message</h3>
+      <p>Have a question about data, partnerships, or API access? Drop a note — we'll get back to you soon.</p>
+
+      <form id="contactForm" novalidate>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+          <div>
+            <label for="name">Your name</label>
+            <input id="name" name="name" type="text" autocomplete="name" placeholder="Jane Doe" required>
+          </div>
+          <div>
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@domain.com" required>
+          </div>
+        </div>
+
+        <div style="margin-bottom:12px;">
+          <label for="subject">Subject</label>
+          <input id="subject" name="subject" type="text" placeholder="Partnership / API / Support" required>
+        </div>
+
+        <div style="margin-bottom:12px;">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell us about your project or question..." required></textarea>
+        </div>
+
+        <div style="display:flex; gap:12px; align-items:center; margin-top:8px;">
+          <button type="submit" class="btn" aria-live="polite">Send message</button>
+          <div style="font-size:0.88rem; color:var(--muted)">Or email <a href="mailto:support@airlytic.com">support@airlytic.com</a></div>
+        </div>
+      </form>
+    </aside>
+  </main>
+
+  <!-- Floating quick actions -->
+  <div style="position:fixed; right:18px; bottom:18px; display:flex; flex-direction:column; gap:10px; z-index:1200;">
+    <a style="background:var(--brand); color:#fff; width:56px; height:56px; border-radius:50%; display:grid; place-items:center; text-decoration:none;" href="tel:+639171234567" title="Call AirLytic"><i class="fas fa-phone"></i></a>
+    <button id="openChat" style="background:#0f2a57; color:#fff; width:48px; height:48px; border-radius:50%; border:0;"><i class="fas fa-comments"></i></button>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="wrap" style="max-width:var(--max-width); margin:0 auto; display:flex; gap:24px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;">
+      <div>
+        <img src="air.png" alt="AirLytic logo" style="height:40px; display:block; margin-bottom:8px">
+        <p style="color:#cfe3ff">AirLytic — real-time air quality insights, personalized recommendations, and easy-to-use data tools.</p>
+      </div>
+      <div>
+        <h4 style="color:#cfe3ff">Company</h4>
+        <p><a href="#" style="color:inherit">About</a><br><a href="#" style="color:inherit">Careers</a></p>
+      </div>
+      <div>
+        <h4 style="color:#cfe3ff">Resources</h4>
+        <p><a href="#" style="color:inherit">API</a><br><a href="#" style="color:inherit">Docs</a></p>
+      </div>
+    </div>
+    <div style="text-align:center; color:rgba(255,255,255,0.55); margin:18px auto 40px;">© <span id="year"></span> AirLytic. All rights reserved.</div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // loadHeader already called above; (Header.html injects nav)
+    // client-side form handling
+    (function(){
+      const form = document.getElementById('contactForm');
+      const toast = document.getElementById('toast');
+      function showToast(msg, time = 3000) {
+        toast.textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(toast._t);
+        toast._t = setTimeout(()=> toast.classList.remove('show'), time);
+      }
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        const data = {
+          name: form.name.value.trim(),
+          email: form.email.value.trim(),
+          subject: form.subject.value.trim(),
+          message: form.message.value.trim()
+        };
+        if(!data.name || !data.email || !data.subject || !data.message){
+          showToast('Please complete all fields.');
+          return;
+        }
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if(!re.test(data.email)){
+          showToast('Please enter a valid email address.');
+          return;
+        }
+        showToast('Sending message...');
+        setTimeout(()=>{
+          showToast('Message sent — we will reply within 1–2 business days.');
+          form.reset();
+        }, 900);
+      });
+    })();
+
+    document.getElementById('openChat').addEventListener('click', function(){
+      const q = prompt('Quick chat with AirLytic — enter your question:');
+      if(q && q.trim()){
+        alert('Thanks! A team member will follow up via email if you provide contact details.');
+      }
+    });
+  </script>
+</body>
+</html>

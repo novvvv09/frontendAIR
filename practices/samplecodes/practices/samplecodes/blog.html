@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AirLytic — Our Latest Media</title>
+
+  <!-- Fonts & icons -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-7H9Wj6E5uUmtzBr8hjq3bE9U8uwgLM1u9bXEdqjhvTTscMRB1jW+E9by7D5cXv8Ht0szzUASoHK3IuA6hC/9+w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <style>
+    :root{
+      --bg-1: #0b1020;
+      --bg-2: #121428;
+      --card: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.03);
+      --accent: #7db6ff;
+      --accent-2: #a86bff;
+      --muted:#98a0b6;
+      --radius: 20px;
+      --glass-border: rgba(255,255,255,0.06);
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    html,body{height:100%; margin:0; background: linear-gradient(180deg,#0b1020 0%, #0d1330 60%, #121428 100%); color:#e9eefb; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+
+    /* header loader container */
+    #header-container{position:relative; z-index:20;}
+
+    /* page wrapper */
+    .page {
+      max-width: 1200px;
+      margin: 28px auto;
+      padding: 28px;
+      box-sizing:border-box;
+      position:relative;
+    }
+
+    /* card-like banner with glow mimicking reference */
+    .banner {
+      background: radial-gradient(800px 200px at 10% 10%, rgba(168,107,255,0.12), transparent 6%),
+                  radial-gradient(600px 180px at 90% 20%, rgba(123,182,255,0.08), transparent 10%),
+                  linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius: 28px;
+      padding: 36px;
+      display:flex;
+      gap: 28px;
+      align-items:center;
+      box-shadow: 0 20px 60px rgba(5,8,20,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
+      border: 1px solid var(--glass-border);
+      overflow:visible;
+      backdrop-filter: blur(6px);
+    }
+
+    .banner-left {
+      flex:1;
+      min-width: 280px;
+    }
+
+    .banner-left h1{
+      font-size: 2.1rem;
+      margin:0 0 10px 0;
+      line-height:1.02;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+    .banner-left p{
+      margin: 0 0 18px 0;
+      color: var(--muted);
+      max-width: 680px;
+    }
+    .banner-left .cta {
+      display:inline-flex;
+      gap:12px;
+      align-items:center;
+    }
+    .btn {
+      background: linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#061029;
+      padding:10px 18px;
+      border-radius: 12px;
+      font-weight:700;
+      text-decoration:none;
+      box-shadow: 0 10px 26px rgba(43,127,255,0.12);
+      transition: transform .18s ease, box-shadow .18s;
+    }
+    .btn:hover{ transform: translateY(-4px); box-shadow: 0 18px 38px rgba(168,107,255,0.12); }
+
+    .banner-right {
+      width: 420px;
+      flex: 0 0 420px;
+      position:relative;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .floating-card {
+      width: 340px;
+      height: 240px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.04);
+      box-shadow: 0 30px 60px rgba(6,10,20,0.6);
+      padding:16px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      transform: translateY(0);
+      animation: floaty 6s ease-in-out infinite;
+    }
+    .floating-card img{ width:100%; height:100%; object-fit:cover; border-radius:12px; }
+
+    @keyframes floaty { 0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)} }
+
+    /* small decorative plant / leaf */
+    .banner .decor {
+      position:absolute;
+      right: 18px;
+      top: 8px;
+      width:120px;
+      height:160px;
+      opacity:0.9;
+      filter: drop-shadow(0 20px 40px rgba(80,0,160,0.12));
+    }
+
+    /* "Our Latest Media" heading */
+    .section-head {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin:36px 0 16px 0;
+      gap:16px;
+    }
+    .section-head h2{ margin:0; font-size:1.5rem; color:#fff; opacity:0; transform:translateY(20px); transition: all .7s cubic-bezier(.16,.84,.24,1); }
+    .section-head h2.in { opacity:1; transform:none; }
+    .section-head p{ margin:0; color:var(--muted); font-size:0.95rem; opacity:0; transform:translateY(14px); transition: all .7s cubic-bezier(.16,.84,.24,1) .06s; }
+    .section-head p.in { opacity:1; transform:none; }
+
+    /* Blog cards grid for larger screens and swiper for small/medium */
+    .grid {
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:22px;
+      margin-top: 18px;
+    }
+
+    .blog-card {
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.04);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      transition: transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s;
+      height: 100%;
+      min-height: 360px;
+      position:relative;
+      padding-bottom:12px;
+
+      /* animation initial state (hidden, translateY) */
+      opacity: 0;
+      transform: translateY(28px) scale(.997);
+      will-change: transform, opacity;
+      transition: transform 620ms cubic-bezier(.16,.84,.24,1), opacity 620ms cubic-bezier(.16,.84,.24,1);
+    }
+
+    .blog-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      box-shadow: 0 30px 60px rgba(6,10,20,0.45), 0 0 28px rgba(123,182,255,0.03);
+    }
+
+    .blog-card:hover{
+      transform: translateY(-10px) scale(1.01);
+      box-shadow: 0 30px 60px rgba(7,11,24,0.6), 0 0 40px rgba(123,182,255,0.06);
+    }
+
+    .blog-card .media {
+      height: 210px;
+      overflow:hidden;
+      position:relative;
+      flex:0 0 210px;
+    }
+    .blog-card .media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transition: transform .8s ease;
+    }
+    .blog-card:hover .media img{ transform: scale(1.06); }
+
+    .tag {
+      position:absolute;
+      left:14px;
+      top:14px;
+      background: linear-gradient(90deg, rgba(43,127,255,0.14), rgba(168,107,255,0.14));
+      color:#fff;
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:0.78rem;
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .card-body {
+      padding:14px 16px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      color: #dfe9ff;
+      flex:1;
+    }
+    .card-title { font-size:1.05rem; font-weight:700; color:#fff; margin:0; }
+    .card-desc { color:var(--muted); font-size:0.95rem; line-height:1.45; margin:0; max-height:4.2em; overflow:hidden; }
+    .card-meta { display:flex; align-items:center; justify-content:space-between; margin-top:auto; gap:12px; }
+
+    .author {
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .author img{ width:36px; height:36px; border-radius:50%; object-fit:cover; border:1px solid rgba(255,255,255,0.04); }
+    .author .name { font-size:0.86rem; font-weight:700; color:#fff; }
+    .author .role { font-size:0.72rem; color:var(--muted); margin-top:2px; }
+
+    .read-more {
+      background:transparent;
+      color:var(--accent);
+      border: 1px solid rgba(123,182,255,0.12);
+      padding:8px 12px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:700;
+      font-size:0.88rem;
+      transition: background .18s, transform .18s;
+    }
+    .read-more:hover{ background: rgba(43,127,255,0.06); transform:translateY(-3px); }
+
+    /* footer */
+    .footer {
+      margin-top:48px;
+      padding:28px;
+      border-radius:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .footer .cols { display:flex; gap: 40px; flex-wrap:wrap; }
+    .footer h4{ margin:0 0 8px 0; font-size:1rem; color: #fff;}
+    .footer a{ color:var(--muted); text-decoration:none; display:block; margin:6px 0; font-size:0.94rem; }
+    .copyright { color:var(--muted); margin-top:18px; font-size:0.9rem; }
+
+    /* responsive */
+    @media (max-width: 1024px){
+      .banner { flex-direction:column; padding:20px; gap:16px; }
+      .banner-right{ width:100%; flex:0 0 auto; }
+      .floating-card{ width:100%; max-width:520px; height: 240px; }
+      .grid{ grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 700px){
+      .page{ padding:18px;}
+      .grid{ grid-template-columns: 1fr; }
+      .banner { padding:16px; border-radius:18px; }
+      .banner-left h1{ font-size:1.55rem; }
+      .banner-right{ display:flex; justify-content:flex-end; }
+    }
+
+    /* small animations for reveal generic */
+    .reveal { opacity:0; transform: translateY(20px) scale(.995); transition: all .7s cubic-bezier(.16,.84,.24,1); }
+    .reveal.in { opacity:1; transform:none; }
+  </style>
+</head>
+
+<body>
+  <!-- header loader (keeps your header pattern) -->
+  <div id="header-container"></div>
+
+  <script>
+    async function loadHtmlWithScripts(url, containerSelector) {
+      try {
+        const res = await fetch(url, { cache: 'no-store' });
+        if (!res.ok) throw new Error('Failed to load ' + url + ' — ' + res.status);
+        const text = await res.text();
+        const temp = document.createElement('div');
+        temp.innerHTML = text;
+        const container = document.querySelector(containerSelector);
+        if (!container) throw new Error('Container not found: ' + containerSelector);
+
+        const scripts = [];
+        Array.from(temp.childNodes).forEach(node => {
+          if (node.tagName && node.tagName.toLowerCase() === 'script') scripts.push(node);
+          else container.appendChild(node);
+        });
+
+        // run scripts
+        for (const s of scripts) {
+          const src = s.getAttribute && s.getAttribute('src');
+          const type = s.getAttribute && s.getAttribute('type');
+          if (src) {
+            await new Promise((resolve, reject) => {
+              const ext = document.createElement('script');
+              if (type) ext.type = type;
+              ext.src = src;
+              ext.async = false;
+              ext.onload = resolve;
+              ext.onerror = () => reject(new Error('Failed to load script: ' + src));
+              document.head.appendChild(ext);
+            });
+          } else {
+            const inline = document.createElement('script');
+            if (type) inline.type = type;
+            inline.text = s.textContent || s.innerText || '';
+            document.body.appendChild(inline);
+            inline.remove();
+          }
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // try to load your header file (Header.html)
+    loadHtmlWithScripts('Header.html', '#header-container').catch(console.error);
+  </script>
+
+  <main class="page">
+    <!-- ENHANCED BANNER: distinct section with separator animation -->
+<section class="banner-hero" id="hero" aria-label="Hero — Our Latest Media" style="position:relative; overflow:visible;">
+  <style>
+    /* keep using your theme variables */
+    :root { --accent: #7db6ff; --accent-2: #a86bff; --muted: #98a0b6; }
+
+    .banner-hero {
+      width:100%;
+      box-sizing:border-box;
+      padding: 56px 20px 36px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      flex-direction:column;
+      gap:18px;
+      position:relative;
+      z-index:1;
+      background: linear-gradient(180deg, rgba(8,18,40,0.9), rgba(10,14,28,0.92));
+      border-radius: 16px;
+      margin-bottom: 28px;
+      -webkit-font-smoothing:antialiased;
+      isolation:isolate;
+    }
+
+    /* soft blurred radial glow behind content */
+    .banner-hero::before{
+      content:"";
+      position:absolute;
+      top:-60px;
+      left:50%;
+      transform:translateX(-50%);
+      width:760px;
+      height:420px;
+      background: radial-gradient(circle at 40% 30%, rgba(123,182,255,0.14), rgba(168,107,255,0.08) 35%, transparent 55%);
+      filter: blur(80px);
+      z-index:0;
+      pointer-events:none;
+    }
+
+    .banner-inner { position:relative; z-index:2; max-width:1100px; width:100%; display:flex; flex-direction:column; gap:14px; align-items:center; }
+
+    .banner-title {
+      margin:0;
+      font-weight:800;
+      color:#fff;
+      line-height:1.04;
+      letter-spacing:-0.02em;
+      font-size: clamp(28px, 5vw, 44px);
+      opacity:0;
+      transform: translateY(18px);
+      transition: transform .7s cubic-bezier(.16,.84,.24,1), opacity .7s;
+      display:inline-block;
+      position:relative;
+    }
+
+    /* animated underline reveal */
+    .banner-title .underline {
+      display:block;
+      height:6px;
+      width:0%;
+      background: linear-gradient(90deg,var(--accent), var(--accent-2));
+      border-radius:999px;
+      margin-top:10px;
+      transition: width .7s cubic-bezier(.2,.9,.3,1);
+    }
+
+    .banner-sub {
+      color: rgba(255,255,255,0.9);
+      max-width:880px;
+      margin: 0 auto;
+      font-size: clamp(14px, 1.8vw, 18px);
+      opacity:0;
+      transform: translateY(12px);
+      transition: transform .7s cubic-bezier(.16,.84,.24,1) .08s, opacity .7s .08s;
+    }
+
+    /* featured badge */
+    .featured-badge {
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      background: linear-gradient(90deg, rgba(123,182,255,0.12), rgba(168,107,255,0.08));
+      color: #eaf6ff;
+      font-weight:700;
+      font-size:0.88rem;
+      border: 1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 8px 30px rgba(43,127,255,0.06);
+      opacity:0;
+      transform: translateY(6px) scale(.98);
+      transition: all .7s .12s cubic-bezier(.16,.84,.24,1);
+    }
+
+    /* banner image with gentle parallax float */
+    .banner-image {
+      margin-top:14px;
+      width: min(560px, 86%);
+      border-radius: 14px;
+      overflow:hidden;
+      z-index:2;
+      transform: translateY(0);
+      transition: transform 1.4s ease;
+    }
+    .banner-image img { width:100%; height:auto; display:block; border-radius:12px; }
+
+    /* sweep separator (diagonal thin gradient) */
+    .banner-sep {
+      --h: 12px; /* separator height */
+      position: absolute;
+      left: -6%;
+      right: -6%;
+      height: var(--h);
+      bottom: -6px;
+      transform: rotate(-1.6deg);
+      z-index:3;
+      pointer-events:none;
+      overflow:visible;
+    }
+    .banner-sep .sweep {
+      position:absolute;
+      left:-30%;
+      top:0;
+      bottom:0;
+      width:40%;
+      background: linear-gradient(90deg, rgba(123,182,255,0.0), rgba(123,182,255,0.14), rgba(168,107,255,0.04), rgba(123,182,255,0.0));
+      filter: blur(8px);
+      transform: translateX(0);
+      animation: sweep 2.4s ease-in-out infinite;
+      opacity:0.9;
+    }
+    @keyframes sweep {
+      0% { transform: translateX(-10%); }
+      50% { transform: translateX(95%); }
+      100% { transform: translateX(200%); }
+    }
+
+    /* visible state classes applied by JS */
+    .banner-hero.in .banner-title { opacity:1; transform:none; }
+    .banner-hero.in .banner-title .underline { width: 56%; }
+    .banner-hero.in .banner-sub { opacity:1; transform:none; }
+    .banner-hero.in .featured-badge { opacity:1; transform:none; }
+
+    /* responsive tweaks */
+    @media (max-width: 900px) {
+      .banner-sep { left:-20%; right:-20%; }
+      .banner-image { max-width:420px; }
+    }
+    @media (max-width: 520px) {
+      .banner-hero { padding:36px 14px 28px; border-radius:12px; }
+      .banner-sep { display:none; } /* hide separator on very small screens for cleanliness */
+    }
+
+  </style>
+
+  <div class="banner-inner">
+    <div class="featured-badge" id="badge">FEATURED</div>
+
+    <h1 class="banner-title" id="heroTitle">
+      Studio Pley<br>
+      <span style="color:var(--accent-2); font-weight:800;">Our Latest Media</span>
+      
+    </h1>
+
+    <p class="banner-sub">
+      Discover our visualizations, case studies and media that explain how AirLytic turns sensor readings into clear, usable air-quality insights. Browse interactive demos, how-tos, and research breakdowns created by our team.
+    </p>
+
+    <div class="banner-image" aria-hidden="false">
+      <img src="b.jfif" alt="">
+    </div>
+  </div>
+
+  <!-- animated separator that visually divides the banner from below content -->
+  <div class="banner-sep" aria-hidden="true">
+    <div class="sweep"></div>
+  </div>
+
+  <script>
+    // small script to trigger entrance animation once the banner intersects viewport
+    (function(){
+      const hero = document.querySelector('.banner-hero');
+      if(!hero) return;
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(e => {
+          if(e.isIntersecting){
+            hero.classList.add('in');
+            // subtle extra parallax movement for the image
+            const imgWrap = hero.querySelector('.banner-image');
+            if(imgWrap){
+              imgWrap.animate([
+                { transform: 'translateY(6px)' },
+                { transform: 'translateY(-6px)' },
+                { transform: 'translateY(0)' }
+              ], { duration: 2400, easing: 'ease-in-out' });
+            }
+            obs.disconnect();
+          }
+        });
+      }, { threshold: 0.18 });
+      io.observe(hero);
+    })();
+  </script>
+</section>
+
+
+
+ <!-- Blog grid / swiper -->
+<section id="blog" class="reveal">
+  <style>
+    /* Card Styles */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .blog-card {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    .blog-card .media img {
+      width: 100%;
+      display: block;
+      border: none;
+      outline: none;
+    }
+
+    .blog-card .tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--accent);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 10px;
+      font-size: 12px;
+    }
+
+    .card-body {
+      padding: 16px;
+    }
+
+    .card-title {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .author img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+
+    .read-more {
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    /* Overlay Styles */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      z-index: 9999;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .overlay-content {
+      background: rgba(20, 20, 20, 0.95);
+      padding: 30px;
+      max-width: 600px;
+      border-radius: 20px;
+      color: white;
+      text-align: center;
+      animation: fadeInUp 0.4s ease;
+    }
+
+    .overlay-content h2 {
+      margin-bottom: 15px;
+      font-size: 26px;
+    }
+
+    .overlay-content p {
+      margin-bottom: 20px;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .overlay-content a {
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    .close-overlay {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 15px;
+      font-weight: 700;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+
+  <div class="grid" id="grid">
+    <!-- CARD 1 -->
+    <article class="blog-card" 
+      data-content="K-Means clustering allows us to take vast amounts of raw air quality data and categorize them into meaningful groups based on similarity. By minimizing the distance between data points and cluster centroids, we can better understand pollution patterns. This method is widely used in environmental monitoring to reveal trends that might not be obvious through raw data alone. Communities and researchers use this to take proactive action."
+      data-link="https://www.youtube.com/watch?v=4b5d3muPQmA">
+      <div class="media">
+        <img src="Visual.png" alt="K-Means visualization" />
+        <span class="tag">Visualization</span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">K-Means Clustering</h3>
+        <p class="card-desc">Learn how K-Means groups air quality readings for clear insights.</p>
+        <div class="card-meta">
+          <div class="author">
+           
+          <a class="read-more" href="#">Read</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- CARD 2 -->
+    <article class="blog-card" 
+      data-content="AirLytic simplifies inspection processes by automating visual monitoring and analysis. This helps reduce fatigue and human error, enabling more consistent and accurate data collection. The system is designed to support real-time responses and clear communication of results, making it a powerful tool for both local governments and communities. It’s built to adapt to different environments seamlessly."
+      data-link="https://www.airqualitynews.com/">
+      <div class="media">
+        <img src="develop.png" alt="Why choose Airlytic" />
+        <span class="tag">Development</span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Why Choose AirLytic</h3>
+        <p class="card-desc">See how automation improves accuracy and reliability.</p>
+        <div class="card-meta">
+          <div class="author">
+            
+          <a class="read-more" href="#">Read</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- CARD 3 -->
+    <article class="blog-card" 
+      data-content="Understanding how clustering algorithms like K-Means are implemented allows us to build more accurate models for environmental monitoring. The algorithm works by iteratively refining clusters, reducing the variance within each group. This step-by-step process ensures that air quality readings are categorized accurately. It's a crucial technique for turning messy sensor data into clean and interpretable insights."
+      data-link="https://www.geeksforgeeks.org/k-means-clustering-introduction/">
+      <div class="media">
+        <img src="Learn.png" alt="How it's implemented" />
+        <span class="tag">Learn</span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Explore How It's Implemented</h3>
+        <p class="card-desc">Discover how we implement clustering step-by-step.</p>
+        <div class="card-meta">
+          <div class="author">
+            
+          <a class="read-more" href="#">Read</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- CARD 4 -->
+    <article class="blog-card" 
+      data-content="We collect raw data from various sensors and turn it into easy-to-understand visual dashboards. This transformation allows users to quickly spot trends, pollution peaks, and safe zones. By doing so, local communities can make informed decisions to protect health and the environment. Data transparency is at the heart of our process."
+      data-link="https://www.epa.gov/outdoor-air-quality-data">
+      <div class="media">
+        <img src="discover.png" alt="What we do with your data" />
+        <span class="tag">Discover</span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">What We Do With Your Data</h3>
+        <p class="card-desc">Turning raw data into actionable environmental alerts.</p>
+        <div class="card-meta">
+          <div class="author">
+            
+          <a class="read-more" href="#">Read</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- CARD 5 -->
+    <article class="blog-card" 
+      data-content="This case study examines air quality before and after targeted interventions in a metropolitan area. The results showed significant reductions in pollution levels, improved air clarity, and better community health outcomes. Through continuous monitoring and analysis, actionable strategies were created to sustain the improvements."
+      data-link="https://www.who.int/health-topics/air-pollution">
+      <div class="media">
+        <img src="blog1.jpg" alt="Air Quality Analysis" />
+        <span class="tag">Case Study</span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Air Quality Analysis — Metro Case Study</h3>
+        <p class="card-desc">Before and after results of real interventions.</p>
+        <div class="card-meta">
+          <div class="author">
+          <a class="read-more" href="#">Read</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- CARD 6 -->
+    <article class="blog-card" 
+      data-content="Setting up a low-cost sensor is an excellent way to start monitoring your local environment. AirLytic provides an easy-to-follow process that lets users collect, upload, and visualize real-time data. This enables community-led monitoring and empowers residents to make data-informed decisions to improve their surroundings."
+      data-link="https://www.youtube.com/watch?v=zH1Z8bA2KpA">
+      <div class="media">
+        <img src="discover2.png" alt="Practical steps" />
+        <span class="tag">How-to</span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Practical Steps to Capture Sensor Data</h3>
+        <p class="card-desc">Hands-on guide for setting up and uploading sensor data.</p>
+        <div class="card-meta">
+          <div class="author">
+          <a class="read-more" href="#">Read</a>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay">
+    <div class="overlay-content">
+      <h2 id="overlay-title"></h2>
+      <p id="overlay-text"></p>
+      <a id="overlay-link" href="#" target="_blank">Learn more</a>
+      <br />
+      <button class="close-overlay" id="closeOverlay">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const cards = document.querySelectorAll('.blog-card');
+    const overlay = document.getElementById('overlay');
+    const overlayTitle = document.getElementById('overlay-title');
+    const overlayText = document.getElementById('overlay-text');
+    const overlayLink = document.getElementById('overlay-link');
+    const closeOverlay = document.getElementById('closeOverlay');
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const title = card.querySelector('.card-title').textContent;
+        const content = card.getAttribute('data-content');
+        const link = card.getAttribute('data-link');
+
+        overlayTitle.textContent = title;
+        overlayText.textContent = content;
+        overlayLink.href = link;
+
+        overlay.classList.add('active');
+      });
+    });
+
+    closeOverlay.addEventListener('click', () => {
+      overlay.classList.remove('active');
+    });
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) overlay.classList.remove('active');
+    });
+  </script>
+</section>
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="footer reveal">
+      <div class="cols">
+        <div style="flex:1; min-width:220px;">
+          <h4>About AirLytic</h4>
+          <p style="color:var(--muted); margin:6px 0 0 0;">AirLytic transforms sensor and visual data into actionable air-quality insights for communities and decision-makers.</p>
+        </div>
+
+        <div style="flex:0.6; min-width:160px;">
+          <h4>Resources</h4>
+          <a href="#">Documentation</a>
+          <a href="#">Case Studies</a>
+          <a href="#">API</a>
+        </div>
+
+        <div style="flex:0.8; min-width:180px;">
+          <h4>Contact</h4>
+          <a href="#">Support</a>
+          <a href="#">Partnerships</a>
+        </div>
+      </div>
+
+      <div class="copyright">© <span id="year"></span> AirLytic. All rights reserved.</div>
+    </footer>
+  </main>
+
+  <!-- Scripts: Swiper + small interactivity -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // reveal on scroll for elements with .reveal (existing behavior)
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('in');
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(r => io.observe(r));
+
+    // --- Animation: cards fade+slide up with stagger; works with Swiper clones & filtering ---
+    let cardObserver = null;
+    function setupCardObserver() {
+      // disconnect previous observer if any
+      if (cardObserver) {
+        try { cardObserver.disconnect(); } catch (e) {}
+      }
+
+      const cards = Array.from(document.querySelectorAll('.blog-card'));
+      if (!cards.length) return;
+
+      cardObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          // compute index among currently visible cards for nice stagger
+          const visibleCards = Array.from(document.querySelectorAll('.blog-card')).filter(c => c.style.display !== 'none');
+          const idx = Math.max(0, visibleCards.indexOf(entry.target));
+          const delay = Math.min(540, idx * 90); // cap delay
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }, delay);
+        });
+      }, {
+        threshold: 0.14,
+        rootMargin: '0px 0px -8% 0px'
+      });
+
+      // observe only those not already visible
+      cards.forEach(c => {
+        if (!c.classList.contains('visible') && c.style.display !== 'none') cardObserver.observe(c);
+      });
+    }
+
+    // Call initially
+    setupCardObserver();
+
+    // Search & filter (keeps your logic) — re-run observer after filters
+    const filter = document.getElementById('filter');
+    const search = document.getElementById('search');
+    const cardsList = () => Array.from(document.querySelectorAll('.blog-card'));
+
+    function applyFilters(){
+      const q = (search.value || '').toLowerCase().trim();
+      const tag = filter.value;
+      cardsList().forEach(card=>{
+        const t = (card.getAttribute('data-tags')||'').toLowerCase();
+        const title = (card.querySelector('.card-title')?.textContent||'').toLowerCase();
+        const desc = (card.querySelector('.card-desc')?.textContent||'').toLowerCase();
+        const matchTag = tag === 'all' || t.includes(tag);
+        const matchQ = !q || title.includes(q) || desc.includes(q);
+        card.style.display = (matchTag && matchQ) ? '' : 'none';
+        // remove visible class so animation can replay if item becomes visible again:
+        if (card.style.display === '') card.classList.remove('visible');
+      });
+      // re-observe visible cards (with slight debounce)
+      clearTimeout(window._filterTimer);
+      window._filterTimer = setTimeout(() => setupCardObserver(), 120);
+    }
+
+    filter.addEventListener('change', applyFilters);
+    search.addEventListener('input', function(){ window.requestAnimationFrame(applyFilters); });
+
+    // Responsiveness: for small screens switch to Swiper carousel
+    function enableSwiperIfMobile(){
+      const grid = document.getElementById('grid');
+      const mobile = window.innerWidth < 768;
+      const mobileSwiper = document.getElementById('mobile-swiper');
+
+      if (mobile) {
+        // move cards into mobile-swiper (clone) only if not already
+        if (!mobileSwiper.hasChildNodes()) {
+          const visibleCards = cardsList().filter(c => c.style.display !== 'none');
+          visibleCards.forEach(c => {
+            const clone = c.cloneNode(true);
+            clone.classList.add('swiper-slide');
+            mobileSwiper.appendChild(clone);
+          });
+        }
+        grid.style.display = 'none';
+        mobileSwiper.style.display = 'block';
+
+        // init swiper if not already
+        if (!window._blogSwiper) {
+          window._blogSwiper = new Swiper('#mobile-swiper', {
+            slidesPerView: 1.05,
+            spaceBetween: 14,
+            centeredSlides: true,
+            loop: true,
+            autoplay: { delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true },
+            pagination: { el: '.swiper-pagination', clickable: true },
+            on: {
+              // when swiper created, setup observer for clones
+              init: function(){ setupCardObserver(); }
+            }
+          });
+        } else {
+          // if swiper exists but clones changed, refresh observer
+          setupCardObserver();
+        }
+      } else {
+        if (window._blogSwiper) {
+          window._blogSwiper.destroy(true, true);
+          window._blogSwiper = null;
+          // clear mobile-swiper content
+          mobileSwiper.innerHTML = '';
+        }
+        grid.style.display = 'grid';
+        mobileSwiper.style.display = 'none';
+        // ensure original grid cards observed
+        setupCardObserver();
+      }
+    }
+
+    window.addEventListener('resize', () => {
+      enableSwiperIfMobile();
+    });
+
+    // run on load
+    enableSwiperIfMobile();
+
+    // Accessibility: keyboard focus style for read buttons
+    document.querySelectorAll('.read-more').forEach(btn=>{
+      btn.addEventListener('focus', ()=> btn.style.outline = '2px solid rgba(123,182,255,0.18)');
+      btn.addEventListener('blur', ()=> btn.style.outline = 'none');
+    });
+
+    // optional: progressive reveal of images (lazy)
+    document.querySelectorAll('.blog-card img').forEach(img=>{
+      img.loading = 'lazy';
+    });
+
+    // When the blog section becomes visible, reveal the section-head with a small stagger
+    (function revealSectionHead(){
+      const blogSection = document.getElementById('blog');
+      if(!blogSection) return;
+      const sh = document.querySelector('.section-head h2');
+      const sp = document.querySelector('.section-head p');
+      const shObserver = new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            if(sh) sh.classList.add('in');
+            if(sp) sp.classList.add('in');
+            shObserver.disconnect();
+          }
+        });
+      }, { threshold: 0.18 });
+      shObserver.observe(blogSection);
+    })();
+  </script>
+</body>
+</html>

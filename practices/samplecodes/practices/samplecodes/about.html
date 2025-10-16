@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About Us</title>
+  <meta name="description" content="About AirLytic — team with uploadable profile photos (dark theme)" />
+  <style>
+    :root{
+      --bg: #0b1220;
+      --panel: #0f1724;
+      --muted: #9aa9c7;
+      --ink: #e8eefb;
+      --accent-1: #39d0d1;
+      --accent-2: #5b6cff;
+      --accent-3: #6ef0c9;
+      --glass: rgba(255,255,255,0.02);
+      --radius:18px;
+      --maxw:1200px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(1200px 400px at 10% 10%, rgba(91,108,255,0.06), transparent 8%),
+        radial-gradient(1000px 300px at 90% 90%, rgba(57,208,209,0.03), transparent 8%),
+        var(--bg);
+      color:var(--ink);
+      -webkit-font-smoothing:antialiased;
+      padding:32px 18px;
+      display:flex;
+      justify-content:center;
+      line-height:1.5;
+    }
+    .wrap{width:100%;max-width:var(--maxw);margin:0 auto}
+    .topbar{display:flex;justify-content:space-between;align-items:center;padding:6px 8px 18px 8px;margin-bottom:10px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent-2),var(--accent-1));color:#071227;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;box-shadow:0 8px 30px rgba(91,108,255,0.14), 0 2px 10px rgba(57,208,209,0.06)}
+    .brand h4{margin:0;font-size:16px;color:var(--ink)}
+    .hero{background: linear-gradient(180deg, rgba(12,18,32,0.6), rgba(8,12,24,0.55));border-radius:20px;padding:36px;display:flex;gap:28px;align-items:center;box-shadow: 0 30px 80px rgba(2,6,12,0.65), inset 0 1px 0 rgba(255,255,255,0.02)}
+    .hero-left{flex:1;min-width:320px}
+    .eyebrow{display:inline-block;padding:8px 14px;border-radius:999px;background:rgba(108,255,215,0.06);color:var(--accent-3);font-weight:700;font-size:13px;margin-bottom:14px;letter-spacing:0.4px}
+    .about-title{margin:0 0 8px 0;font-size:40px;line-height:1.02;letter-spacing:-0.02em;font-weight:800;color:var(--ink);display:block;text-shadow: 0 6px 24px rgba(11,17,34,0.55);}
+    .hero-sub{margin-top:12px;color:var(--muted);font-size:16px;max-width:64ch}
+    .hero-art{width:360px;height:240px;border-radius:14px;background: linear-gradient(180deg, rgba(91,108,255,0.06), rgba(57,208,209,0.04));display:flex;align-items:center;justify-content:center;box-shadow: 0 24px 60px rgba(2,6,12,0.6);flex-shrink:0;border: 1px solid rgba(255,255,255,0.02)}
+    .intro{margin:28px 0 18px;padding:20px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 10px 30px rgba(2,6,12,0.6)}
+    .intro h2{margin:6px 0 8px;font-size:20px;color:var(--ink)}
+    .intro p{margin:0;color:var(--muted)}
+    .gmv{margin-top:34px;display:flex;gap:18px;align-items:center;justify-content:center;position:relative;flex-wrap:wrap;}
+    .viewport{overflow:hidden;width:100%;max-width:1100px;border-radius:18px;background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow: 0 30px 90px rgba(2,6,12,0.7);padding:20px;display:block;position:relative;height: 420px;border: 1px solid rgba(255,255,255,0.025)}
+    .vtrack{display:flex;flex-direction:column;gap:26px;transition:transform 520ms cubic-bezier(.2,.9,.2,1);will-change:transform;padding:6px;touch-action:pan-y;margin:0}
+    .gmv-card{min-height:320px;border-radius:16px;padding:28px;background: linear-gradient(180deg, rgba(7,14,28,0.45), rgba(9,16,28,0.35));border: 1px solid rgba(255,255,255,0.02);box-shadow: 0 12px 46px rgba(2,6,12,0.7);display:flex;gap:24px;align-items:flex-start;transition: transform 260ms ease, box-shadow 260ms ease;cursor:pointer}
+    .gmv-card:hover{ transform:translateY(-10px) scale(1.01); box-shadow:0 40px 120px rgba(2,6,12,0.75)}
+    .icon-cont{width:92px;height:92px;border-radius:14px;background:linear-gradient(135deg,var(--accent-2),var(--accent-1));display:flex;align-items:center;justify-content:center;color:#071227;font-weight:800;box-shadow:0 12px 40px rgba(91,108,255,0.14);flex-shrink:0;font-size:22px}
+    .gmv-card h3{margin:0;font-size:22px;color:var(--accent-3)}
+    .gmv-card p{margin:10px 0 0;color:var(--muted);line-height:1.7;font-size:16px}
+
+    /* Team */
+    .team{margin-top:36px;padding:24px;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));box-shadow:0 24px 80px rgba(2,6,12,0.7);border:1px solid rgba(255,255,255,0.02)}
+    .team h3{margin:6px 0 18px;text-align:center;font-size:22px;color:var(--ink)}
+    .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+    .member{background:transparent;border-radius:14px;padding:18px;display:flex;flex-direction:column;align-items:center;gap:14px}
+
+    /* avatar: circular, glowing and supports <img> */
+    .avatar{
+      width:140px;height:140px;border-radius:50%;background:linear-gradient(135deg,var(--accent-2),var(--accent-1));display:flex;align-items:center;justify-content:center;color:#071227;font-weight:800;font-size:34px;position:relative;overflow:hidden;transition: transform 260ms cubic-bezier(.2,.9,.2,1), box-shadow 260ms ease;flex-shrink:0;
+      box-shadow: 0 18px 50px rgba(91,108,255,0.28), 0 0 80px rgba(57,208,209,0.14), 0 6px 36px rgba(31,91,230,0.12) inset;
+      cursor:pointer;
+    }
+    .avatar:focus{outline:3px solid rgba(99,140,255,0.14); outline-offset:6px}
+    .avatar::after{content:'';position:absolute;inset:-12%;border-radius:50%;background: radial-gradient(circle at 30% 20%, rgba(57,208,209,0.14), transparent 15%), radial-gradient(circle at 70% 80%, rgba(91,108,255,0.12), transparent 20%);filter: blur(18px);opacity:1;pointer-events:none;transition:opacity 260ms ease, transform 260ms ease}
+    .avatar:hover, .avatar:focus-within{transform: translateY(-8px) scale(1.04);box-shadow:0 26px 70px rgba(91,108,255,0.36),0 0 120px rgba(57,208,209,0.22),0 10px 46px rgba(31,91,230,0.16) inset}
+    .avatar:hover::after, .avatar:focus-within::after{transform: scale(1.02);opacity:1}
+    .avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+
+    /* hidden file input */
+    input.avatar-input{display:none}
+
+    /* camera icon overlay */
+    .camera{
+      position:absolute; right:8px; bottom:8px; width:34px; height:34px; border-radius:50%; background:rgba(0,0,0,0.28); display:flex;align-items:center;justify-content:center;color:white;font-size:16px;backdrop-filter:blur(4px);
+      box-shadow:0 6px 16px rgba(0,0,0,0.4); cursor:pointer;
+    }
+
+    /* remove button overlay */
+    .remove-btn{
+      position:absolute; left:8px; bottom:8px; width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,0.06); display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px; border:1px solid rgba(255,255,255,0.03); cursor:pointer;
+      box-shadow:0 6px 18px rgba(0,0,0,0.45);
+    }
+
+    .member h4{margin:6px 0 4px;color:var(--ink)}
+    .member p.role{margin:0;color:var(--muted);font-size:15px}
+    .member .quote{margin-top:8px;padding:14px;border-radius:12px;background:var(--glass);width:100%;min-height:76px;color:var(--muted);font-style:italic;border:1px dashed rgba(255,255,255,0.02)}
+
+    footer{margin-top:34px;text-align:center;color:var(--muted);font-size:13px;padding:12px}
+
+/* responsive */
+@media (max-width:1100px){
+  .hero{flex-direction:column;align-items:flex-start;padding:28px}
+  .hero-art{width:100%;height:200px}
+  .viewport{max-width:100%;height:500px}
+  .gmv-card{min-height:320px;padding:20px;gap:18px}
+  .icon-cont{width:78px;height:78px}
+  .team-grid{grid-template-columns:repeat(2,1fr)}
+  .avatar{width:120px;height:120px}
+  .about-title{font-size:34px}
+}
+@media (max-width:680px){
+  body{padding:18px}
+  .viewport{height:560px;padding:16px}
+  .gmv-card{min-height:340px;padding:16px;gap:12px}
+  .icon-cont{width:64px;height:64px}
+  .about-title{font-size:24px}
+  .team-grid{grid-template-columns:1fr}
+  .avatar{width:100px;height:100px}
+}
+@media (prefers-reduced-motion:reduce){
+  .vtrack{transition:none}
+  .gmv-card, .member, .hero-art, .avatar{transition:none}
+  .avatar::after{display:none}
+}
+  
+</style>
+
+
+</head>
+<body>
+  <div class="wrap" id="page">
+    <div class="topbar" role="banner" aria-label="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">AL</div>
+        <div>
+          <h4>AirLytic</h4>
+          <div style="font-size:12px;color:var(--muted)">Air Quality Insights</div>
+        </div>
+      </div>
+      <div aria-hidden="true"></div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-left">
+        <div class="eyebrow" aria-hidden="true"></div>
+        <h1 id="hero-heading" class="about-title">About Us <span style="color:var(--accent-3)">AirLytic</span></h1>
+        <p class="hero-sub">We design intuitive analytics and beautiful visualizations that transform raw air-sensor data into trustworthy, actionable insights for communities, researchers, and policy makers.</p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true" title="Illustration">
+        <svg viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+          <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#39d0d1"/><stop offset="1" stop-color="#5b6cff"/></linearGradient></defs>
+          <rect x="12" y="24" rx="18" width="316" height="192" fill="url(#g1)" opacity="0.06"/>
+          <g transform="translate(28,36)" fill="none" stroke="#5b6cff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 160 L56 86 L104 116 L152 68 L200 128 L248 56" />
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="intro" aria-label="intro-lead">
+      <h2>Innovative Software Solutions for the Future</h2>
+      <p>We build robust analytics and visualizations for air quality — turning sensor readings into clear, actionable insights for communities and decision-makers.</p>
+    </section>
+
+    <!-- GMV -->
+    <section class="gmv" aria-label="Goals Mission Vision">
+      <div class="viewport" id="gmvViewport" tabindex="0" aria-roledescription="carousel" aria-label="Goals Mission Vision">
+        <div class="vtrack" id="vtrack" role="group" aria-label="Goals, mission and vision slides">
+          <article id="slide-0" class="gmv-card" aria-labelledby="g-title" data-idx="0" tabindex="0">
+            <div class="icon-cont" aria-hidden="true">G</div>
+            <div>
+              <h3 id="g-title">Goals</h3>
+              <p>Deliver transparent, reliable air quality products that empower users and communities with timely insights and clear actions. We aim for clarity, accuracy, and accessibility in every dashboard and report.</p>
+            </div>
+          </article>
+
+          <article id="slide-1" class="gmv-card" aria-labelledby="m-title" data-idx="1" tabindex="0">
+            <div class="icon-cont" aria-hidden="true">M</div>
+            <div>
+              <h3 id="m-title">Mission</h3>
+              <p>To democratize air quality information using data, AI, and beautiful visual experiences so people can breathe smarter and live healthier. We prioritize trustworthy models and human-centered design.</p>
+            </div>
+          </article>
+
+          <article id="slide-2" class="gmv-card" aria-labelledby="v-title" data-idx="2" tabindex="0">
+            <div class="icon-cont" aria-hidden="true">V</div>
+            <div>
+              <h3 id="v-title">Vision</h3>
+              <p>A world where communities have accessible environmental intelligence — leading to cleaner air, healthier lives, and better policies. We want data to be a catalyst for positive change.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team" aria-label="Our Dedicated Team">
+      <h3>Our Dedicated Team</h3>
+      <div class="team-grid" role="list">
+        <!-- Member 0 -->
+        <div class="member" role="listitem" data-member="0" data-initials="NV">
+          <input class="avatar-input" id="avatarInput-0" type="file" accept="image/*" aria-label="Upload photo for Nove">
+          <div class="avatar" tabindex="0" role="button" aria-label="Upload or change photo for Nove" data-input="avatarInput-0" title="Nove">
+            NV
+            <div class="camera" aria-hidden="true">📷</div>
+            <div class="remove-btn" aria-hidden="true" title="Remove photo">✕</div>
+          </div>
+          <h4>Nove</h4>
+          <p class="role">Frontend Developer</p>
+          <div class="quote" contenteditable="true" aria-label="Quote from Nove" role="textbox">“Designing accessible interfaces is at the heart of what I build.”</div>
+        </div>
+
+        <!-- Member 1 -->
+        <div class="member" role="listitem" data-member="1" data-initials="SV">
+          <input class="avatar-input" id="avatarInput-1" type="file" accept="image/*" aria-label="Upload photo for Salve">
+          <div class="avatar" tabindex="0" role="button" aria-label="Upload or change photo for Salve" data-input="avatarInput-1" title="Salve">
+            SV
+            <div class="camera" aria-hidden="true">📷</div>
+            <div class="remove-btn" aria-hidden="true" title="Remove photo">✕</div>
+          </div>
+          <h4>Salve</h4>
+          <p class="role">Backend Developer</p>
+          <div class="quote" contenteditable="true" aria-label="Quote from Salve" role="textbox">“Reliable pipelines and clean data are the backbone of every insight.”</div>
+        </div>
+
+        <!-- Member 2 -->
+        <div class="member" role="listitem" data-member="2" data-initials="TR">
+          <input class="avatar-input" id="avatarInput-2" type="file" accept="image/*" aria-label="Upload photo for Trisha">
+          <div class="avatar" tabindex="0" role="button" aria-label="Upload or change photo for Trisha" data-input="avatarInput-2" title="Trisha">
+            TR
+            <div class="camera" aria-hidden="true">📷</div>
+            <div class="remove-btn" aria-hidden="true" title="Remove photo">✕</div>
+          </div>
+          <h4>Trisha</h4>
+          <p class="role">Full-Stack Developer</p>
+          <div class="quote" contenteditable="true" aria-label="Quote from Trisha" role="textbox">“I focus on performant deployments so analyses reach people in real-time.”</div>
+        </div>
+      </div>
+    </section>
+
+    <footer aria-label="Footer"><div style="color:var(--muted)">© <span id="year"></span> AirLytic · Built with care</div></footer>
+  </div>
+
+  <script>
+    // Insert year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Avatar upload + preview + localStorage persistence
+    (function(){
+      const MAX_BYTES = 3_500_000; // 3.5MB limit
+      const memberEls = document.querySelectorAll('.member');
+
+      function readFileAsDataURL(file){
+        return new Promise((res, rej)=>{
+          const r = new FileReader();
+          r.onload = ()=> res(r.result);
+          r.onerror = ()=> rej(new Error('File read error'));
+          r.readAsDataURL(file);
+        });
+      }
+
+      function setAvatarFromDataURL(avatarEl, dataURL){
+        avatarEl.innerHTML = ''; // clear contents (initials, overlays)
+        const img = document.createElement('img');
+        img.src = dataURL;
+        img.alt = avatarEl.getAttribute('sal') || 'Team photo';
+        avatarEl.appendChild(img);
+
+        // camera & remove overlays
+        const cam = document.createElement('div'); cam.className = 'camera'; cam.setAttribute('aria-hidden','true'); cam.textContent = '📷';
+        const rem = document.createElement('div'); rem.className = 'remove-btn'; rem.setAttribute('aria-hidden','true'); rem.textContent = '✕';
+        avatarEl.appendChild(cam); avatarEl.appendChild(rem);
+      }
+
+      function restoreAvatar(index, avatarEl){
+        try{
+          const key = 'team-avatar-' + index;
+          const stored = localStorage.getItem(key);
+          if(stored){
+            setAvatarFromDataURL(avatarEl, stored);
+          } else {
+            // ensure initial letters and overlays present
+            const initials = avatarEl.parentElement.getAttribute('data-initials') || avatarEl.title.slice(0,2).toUpperCase();
+            avatarEl.innerHTML = initials;
+            const cam = document.createElement('div'); cam.className = 'camera'; cam.setAttribute('aria-hidden','true'); cam.textContent = '📷';
+            const rem = document.createElement('div'); rem.className = 'remove-btn'; rem.setAttribute('aria-hidden','true'); rem.textContent = '✕';
+            avatarEl.appendChild(cam); avatarEl.appendChild(rem);
+            // hide remove button when no image
+            rem.style.opacity = '0.0'; rem.style.pointerEvents = 'none';
+          }
+        }catch(e){ console.warn('restore avatar failed', e); }
+      }
+
+      memberEls.forEach((memberEl, idx) => {
+        const avatar = memberEl.querySelector('.avatar');
+        const input = memberEl.querySelector('.avatar-input');
+        const removeBtn = avatar.querySelector('.remove-btn');
+
+        // restore any stored photo
+        restoreAvatar(idx, avatar);
+
+        // helpers
+        function saveAndShow(file){
+          if(!file) return;
+          if(!file.type.startsWith('image/')) { alert('Please choose an image file.'); return; }
+          if(file.size > MAX_BYTES){ alert('Image too large (max 3.5MB).'); return; }
+          readFileAsDataURL(file).then(dataURL=>{
+            setAvatarFromDataURL(avatar, dataURL);
+            localStorage.setItem('team-avatar-' + idx, dataURL);
+            // hook up remove button handler after setting
+            attachRemoveHandler();
+          }).catch(()=> alert('Failed to read file'));
+        }
+
+        // click / keyboard opens file picker
+        avatar.addEventListener('click', ()=> input.click());
+        avatar.addEventListener('keydown', (e)=> {
+          if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); }
+        });
+
+        // file input change
+        input.addEventListener('change', async (e)=>{
+          const file = e.target.files && e.target.files[0];
+          if(file) saveAndShow(file);
+          input.value = '';
+        });
+
+        // drag & drop
+        avatar.addEventListener('dragover', (e)=> { e.preventDefault(); avatar.classList.add('dragover'); });
+        avatar.addEventListener('dragleave', ()=> avatar.classList.remove('dragover'));
+        avatar.addEventListener('drop', (e)=>{
+          e.preventDefault(); avatar.classList.remove('dragover');
+          const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+          if(file) saveAndShow(file);
+        });
+
+        // remove button: visible when image present
+        function attachRemoveHandler(){
+          const rem = avatar.querySelector('.remove-btn');
+          if(!rem) return;
+          rem.style.opacity = '1.0'; rem.style.pointerEvents = 'auto';
+          rem.onclick = (ev)=>{
+            ev.stopPropagation();
+            if(!confirm('Remove photo for this team member?')) return;
+            localStorage.removeItem('team-avatar-' + idx);
+            const initials = memberEl.getAttribute('data-initials') || avatar.title.slice(0,2).toUpperCase();
+            avatar.innerHTML = initials;
+            const cam = document.createElement('div'); cam.className = 'camera'; cam.setAttribute('aria-hidden','true'); cam.textContent = '📷';
+            const remNew = document.createElement('div'); remNew.className = 'remove-btn'; remNew.setAttribute('aria-hidden','true'); remNew.textContent = '✕';
+            avatar.appendChild(cam); avatar.appendChild(remNew);
+            // hide remove when no pic
+            remNew.style.opacity = '0.0'; remNew.style.pointerEvents = 'none';
+            // reattach handler to new remove button
+            attachRemoveHandler();
+          };
+        }
+
+        // if there is an image already, ensure remove works
+        attachRemoveHandler();
+      });
+    })();
+
+    // GMV carousel (kept minimal and responsive; same behavior as earlier)
+    (function(){
+      const vtrack = document.getElementById('vtrack');
+      if(!vtrack) return;
+      const slides = Array.from(vtrack.children);
+      const viewport = document.getElementById('gmvViewport');
+      let idx = 0, timer = null, autoplay = true;
+      function getGap(){ const style = getComputedStyle(vtrack); return parseFloat(style.gap || 26); }
+      function slideHeight(){ const gap = getGap(); const rect = slides[0].getBoundingClientRect(); return Math.round(rect.height + gap); }
+      function setViewportHeight(){ const h = slideHeight(); viewport.style.height = h + 'px'; }
+      function update(){ const h = slideHeight(); vtrack.style.transform = `translateY(${-idx * h}px)`; slides.forEach((s,i)=> s.classList.toggle('active', i === idx)); slides[idx].setAttribute('aria-current','true'); slides.forEach((s,i)=> { if(i!==idx) s.removeAttribute('aria-current'); }); }
+      function next(){ idx = (idx + 1) % slides.length; update(); }
+      function prev(){ idx = (idx - 1 + slides.length) % slides.length; update(); }
+      function go(n){ idx = Math.max(0, Math.min(slides.length-1, n)); update(); }
+      function start(){ if (timer) clearInterval(timer); if (!autoplay) return; timer = setInterval(next, 4800); }
+      function stop(){ if (timer) clearInterval(timer); timer = null; }
+      slides.forEach((card,i)=>{ card.addEventListener('click', ()=>{ go(i); restart(); card.focus(); }); card.addEventListener('keydown', (e)=> { if(e.key==='Enter'||e.key===' ') { e.preventDefault(); go(i); restart(); } }); });
+      // pointer drag
+      let dragging=false, startY=0, startTranslate=0;
+      vtrack.addEventListener('pointerdown', e=>{ dragging=true; startY=e.clientY; const m = vtrack.style.transform.match(/translateY\((-?\d+(?:\.\d+)?)px\)/); startTranslate = m ? parseFloat(m[1]) : -idx * slideHeight(); vtrack.style.transition = 'none'; vtrack.setPointerCapture && vtrack.setPointerCapture(e.pointerId); stop(); });
+      vtrack.addEventListener('pointermove', e=>{ if(!dragging) return; const dy = e.clientY - startY; vtrack.style.transform = `translateY(${startTranslate + dy}px)`; });
+      vtrack.addEventListener('pointerup', e=>{ if(!dragging) return; dragging=false; const dy = e.clientY - startY; const threshold = slideHeight()/4; if(dy < -threshold) idx = Math.min(slides.length-1, idx+1); else if(dy > threshold) idx = Math.max(0, idx-1); vtrack.style.transition = ''; update(); restart(); });
+      vtrack.addEventListener('pointercancel', ()=>{ dragging=false; update(); restart(); });
+      viewport.addEventListener('keydown', (e)=>{ if(e.key==='ArrowUp'){ prev(); restart(); } if(e.key==='ArrowDown'){ next(); restart(); } });
+      [viewport].forEach(el=>{ el.addEventListener('mouseenter', stop); el.addEventListener('mouseleave', start); el.addEventListener('focusin', stop); el.addEventListener('focusout', start); });
+      const ro = new ResizeObserver(()=> { setTimeout(()=>{ setViewportHeight(); update(); }, 80); }); ro.observe(vtrack); ro.observe(document.body);
+      function restart(){ if(autoplay){ stop(); setTimeout(start, 2200); } }
+      window.addEventListener('load', ()=>{ setTimeout(()=>{ try{ setViewportHeight(); update(); start(); }catch(e){} }, 60); });
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { stop(); vtrack.style.transition = 'none'; }
+    })();
+
+    // small accessibility helper for quotes
+    document.querySelectorAll('.quote').forEach(q=>{
+      q.addEventListener('focus', ()=> q.setAttribute('aria-live','polite'));
+      q.addEventListener('blur', ()=> q.removeAttribute('aria-live'));
+      q.addEventListener('keydown', (e)=> { if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); q.blur(); }});
+    });
+  </script>
+</body>
+</html>
