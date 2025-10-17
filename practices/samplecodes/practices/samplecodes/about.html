@@ -4,29 +4,29 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>About Us</title>
-  <meta name="description" content="About AirLytic — team with uploadable profile photos (dark theme)" />
+  <meta name="description" content="About AirLytic — team with uploadable profile photos (lightened blue background)" />
   <style>
     :root{
-      --bg: #0b1220;
-      --panel: #0f1724;
-      --muted: #9aa9c7;
-      --ink: #e8eefb;
-      --accent-1: #39d0d1;
-      --accent-2: #5b6cff;
-      --accent-3: #6ef0c9;
-      --glass: rgba(255,255,255,0.02);
+      
+      --bg-primary: #dde0f1; 
+      --bg-mid: #355bd8;     /* middle */
+      --bg-deep: #4f63e4;    /* deep */
+      --panel: rgba(37, 51, 152, 0.9); /* panels sit on top of gradient */
+      --muted: #fbfbfb; /* softer muted text */
+      --ink: #f4f7ff; /* main text */
+      --accent-1: #39d0d1; /* teal accent preserved */
+      --accent-2: #8b7aff; /* violet accent tuned for banner */
+      --accent-3: #aeeedc; /* light cyan for highlights */
+      --glass: rgba(255,255,255,0.03);
       --radius:18px;
       --maxw:1200px;
       font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
+    html,body{
       margin:0;
-      background:
-        radial-gradient(1200px 400px at 10% 10%, rgba(91,108,255,0.06), transparent 8%),
-        radial-gradient(1000px 300px at 90% 90%, rgba(57,208,209,0.03), transparent 8%),
-        var(--bg);
+      /* use banner's vertical blue gradient as the page background */
+      background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-mid) 50%, var(--bg-deep) 100%);
       color:var(--ink);
       -webkit-font-smoothing:antialiased;
       padding:32px 18px;
@@ -39,26 +39,30 @@
     .brand{display:flex;gap:12px;align-items:center}
     .logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent-2),var(--accent-1));color:#071227;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;box-shadow:0 8px 30px rgba(91,108,255,0.14), 0 2px 10px rgba(57,208,209,0.06)}
     .brand h4{margin:0;font-size:16px;color:var(--ink)}
-    .hero{background: linear-gradient(180deg, rgba(12,18,32,0.6), rgba(8,12,24,0.55));border-radius:20px;padding:36px;display:flex;gap:28px;align-items:center;box-shadow: 0 30px 80px rgba(2,6,12,0.65), inset 0 1px 0 rgba(255,255,255,0.02)}
+    .hero{background: linear-gradient(180deg, rgba(18,24,72,0.72), rgba(12,16,48,0.46));border-radius:20px;padding:36px;display:flex;gap:28px;align-items:center;box-shadow: 0 30px 80px rgba(12,18,60,0.45), inset 0 1px 0 rgba(255,255,255,0.02)}
     .hero-left{flex:1;min-width:320px}
     .eyebrow{display:inline-block;padding:8px 14px;border-radius:999px;background:rgba(108,255,215,0.06);color:var(--accent-3);font-weight:700;font-size:13px;margin-bottom:14px;letter-spacing:0.4px}
-    .about-title{margin:0 0 8px 0;font-size:40px;line-height:1.02;letter-spacing:-0.02em;font-weight:800;color:var(--ink);display:block;text-shadow: 0 6px 24px rgba(11,17,34,0.55);}
+    .about-title{margin:0 0 8px 0;font-size:40px;line-height:1.02;letter-spacing:-0.02em;font-weight:800;color:var(--ink);display:block;text-shadow: 0 6px 24px rgba(11,17,34,0.35);}
     .hero-sub{margin-top:12px;color:var(--muted);font-size:16px;max-width:64ch}
-    .hero-art{width:360px;height:240px;border-radius:14px;background: linear-gradient(180deg, rgba(91,108,255,0.06), rgba(57,208,209,0.04));display:flex;align-items:center;justify-content:center;box-shadow: 0 24px 60px rgba(2,6,12,0.6);flex-shrink:0;border: 1px solid rgba(255,255,255,0.02)}
-    .intro{margin:28px 0 18px;padding:20px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 10px 30px rgba(2,6,12,0.6)}
+    .hero-art{width:360px;height:240px;border-radius:14px;background: linear-gradient(180deg, rgba(91,108,255,0.06), rgba(57,208,209,0.04));display:flex;align-items:center;justify-content:center;box-shadow: 0 24px 60px rgba(2,6,12,0.3);flex-shrink:0;border: 1px solid rgba(255,255,255,0.02)}
+    .intro{margin:28px 0 18px;padding:20px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 10px 30px rgba(2,6,12,0.25)}
     .intro h2{margin:6px 0 8px;font-size:20px;color:var(--ink)}
     .intro p{margin:0;color:var(--muted)}
     .gmv{margin-top:34px;display:flex;gap:18px;align-items:center;justify-content:center;position:relative;flex-wrap:wrap;}
-    .viewport{overflow:hidden;width:100%;max-width:1100px;border-radius:18px;background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow: 0 30px 90px rgba(2,6,12,0.7);padding:20px;display:block;position:relative;height: 420px;border: 1px solid rgba(255,255,255,0.025)}
+    .viewport{overflow:hidden;width:100%;max-width:1100px;border-radius:18px;background: linear-gradient(180deg, rgba(15,24,64,0.68), rgba(12,18,48,0.5));box-shadow: 0 30px 90px rgba(6,10,40,0.28);padding:20px;display:block;position:relative;height: 420px;border: 1px solid rgba(255,255,255,0.03)}
     .vtrack{display:flex;flex-direction:column;gap:26px;transition:transform 520ms cubic-bezier(.2,.9,.2,1);will-change:transform;padding:6px;touch-action:pan-y;margin:0}
-    .gmv-card{min-height:320px;border-radius:16px;padding:28px;background: linear-gradient(180deg, rgba(7,14,28,0.45), rgba(9,16,28,0.35));border: 1px solid rgba(255,255,255,0.02);box-shadow: 0 12px 46px rgba(2,6,12,0.7);display:flex;gap:24px;align-items:flex-start;transition: transform 260ms ease, box-shadow 260ms ease;cursor:pointer}
-    .gmv-card:hover{ transform:translateY(-10px) scale(1.01); box-shadow:0 40px 120px rgba(2,6,12,0.75)}
+    /* Make GMV card stack vertically and let text occupy most of the area */
+    .gmv-card{min-height:320px;border-radius:16px;padding:28px;background: linear-gradient(180deg, rgba(26,36,88,0.6), rgba(14,20,56,0.45));border: 1px solid rgba(255,255,255,0.02);box-shadow: 0 12px 46px rgba(6,10,40,0.25);display:flex;flex-direction:column;justify-content:center;gap:18px;transition: transform 260ms ease, box-shadow 260ms ease;cursor:pointer} 
+    .gmv-card:hover{ transform:translateY(-10px) scale(1.01); box-shadow:0 40px 120px rgba(2,6,12,0.3)}
     .icon-cont{width:92px;height:92px;border-radius:14px;background:linear-gradient(135deg,var(--accent-2),var(--accent-1));display:flex;align-items:center;justify-content:center;color:#071227;font-weight:800;box-shadow:0 12px 40px rgba(91,108,255,0.14);flex-shrink:0;font-size:22px}
-    .gmv-card h3{margin:0;font-size:22px;color:var(--accent-3)}
-    .gmv-card p{margin:10px 0 0;color:var(--muted);line-height:1.7;font-size:16px}
+
+    /* GMV title & content enlarged to occupy most of the card */
+    .gmv-title{margin:0;color:var(--accent-3);font-weight:800;line-height:1.02;font-size:36px}
+    /* allow paragraphs to grow and take remaining vertical space */
+    .gmv-card p{margin:12px 0 0;color:var(--muted);line-height:1.45;font-size:18px;flex:1}
 
     /* Team */
-    .team{margin-top:36px;padding:24px;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));box-shadow:0 24px 80px rgba(2,6,12,0.7);border:1px solid rgba(255,255,255,0.02)}
+    .team{margin-top:36px;padding:24px;border-radius:16px;background: linear-gradient(180deg, rgba(15,24,64,0.6), rgba(12,18,48,0.42));box-shadow:0 24px 80px rgba(6,10,40,0.2);border:1px solid rgba(255,255,255,0.03)}
     .team h3{margin:6px 0 18px;text-align:center;font-size:22px;color:var(--ink)}
     .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
     .member{background:transparent;border-radius:14px;padding:18px;display:flex;flex-direction:column;align-items:center;gap:14px}
@@ -66,28 +70,25 @@
     /* avatar: circular, glowing and supports <img> */
     .avatar{
       width:140px;height:140px;border-radius:50%;background:linear-gradient(135deg,var(--accent-2),var(--accent-1));display:flex;align-items:center;justify-content:center;color:#071227;font-weight:800;font-size:34px;position:relative;overflow:hidden;transition: transform 260ms cubic-bezier(.2,.9,.2,1), box-shadow 260ms ease;flex-shrink:0;
-      box-shadow: 0 18px 50px rgba(91,108,255,0.28), 0 0 80px rgba(57,208,209,0.14), 0 6px 36px rgba(31,91,230,0.12) inset;
+      box-shadow: 0 18px 50px rgba(91,108,255,0.18), 0 0 80px rgba(57,208,209,0.06), 0 6px 36px rgba(31,91,230,0.06) inset;
       cursor:pointer;
     }
     .avatar:focus{outline:3px solid rgba(99,140,255,0.14); outline-offset:6px}
-    .avatar::after{content:'';position:absolute;inset:-12%;border-radius:50%;background: radial-gradient(circle at 30% 20%, rgba(57,208,209,0.14), transparent 15%), radial-gradient(circle at 70% 80%, rgba(91,108,255,0.12), transparent 20%);filter: blur(18px);opacity:1;pointer-events:none;transition:opacity 260ms ease, transform 260ms ease}
-    .avatar:hover, .avatar:focus-within{transform: translateY(-8px) scale(1.04);box-shadow:0 26px 70px rgba(91,108,255,0.36),0 0 120px rgba(57,208,209,0.22),0 10px 46px rgba(31,91,230,0.16) inset}
+    .avatar::after{content:'';position:absolute;inset:-12%;border-radius:50%;background: radial-gradient(circle at 30% 20%, rgba(57,208,209,0.08), transparent 15%), radial-gradient(circle at 70% 80%, rgba(91,108,255,0.06), transparent 20%);filter: blur(18px);opacity:1;pointer-events:none;transition:opacity 260ms ease, transform 260ms ease}
+    .avatar:hover, .avatar:focus-within{transform: translateY(-8px) scale(1.04);box-shadow:0 26px 70px rgba(91,108,255,0.26),0 0 120px rgba(57,208,209,0.12),0 10px 46px rgba(31,91,230,0.08) inset}
     .avatar:hover::after, .avatar:focus-within::after{transform: scale(1.02);opacity:1}
     .avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
-
-    /* hidden file input */
-    input.avatar-input{display:none}
 
     /* camera icon overlay */
     .camera{
       position:absolute; right:8px; bottom:8px; width:34px; height:34px; border-radius:50%; background:rgba(0,0,0,0.28); display:flex;align-items:center;justify-content:center;color:white;font-size:16px;backdrop-filter:blur(4px);
-      box-shadow:0 6px 16px rgba(0,0,0,0.4); cursor:pointer;
+      box-shadow:0 6px 16px rgba(0,0,0,0.25); cursor:pointer;
     }
 
     /* remove button overlay */
     .remove-btn{
       position:absolute; left:8px; bottom:8px; width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,0.06); display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px; border:1px solid rgba(255,255,255,0.03); cursor:pointer;
-      box-shadow:0 6px 18px rgba(0,0,0,0.45);
+      box-shadow:0 6px 18px rgba(0,0,0,0.25);
     }
 
     .member h4{margin:6px 0 4px;color:var(--ink)}
@@ -96,43 +97,101 @@
 
     footer{margin-top:34px;text-align:center;color:var(--muted);font-size:13px;padding:12px}
 
-/* responsive */
-@media (max-width:1100px){
-  .hero{flex-direction:column;align-items:flex-start;padding:28px}
-  .hero-art{width:100%;height:200px}
-  .viewport{max-width:100%;height:500px}
-  .gmv-card{min-height:320px;padding:20px;gap:18px}
-  .icon-cont{width:78px;height:78px}
-  .team-grid{grid-template-columns:repeat(2,1fr)}
-  .avatar{width:120px;height:120px}
-  .about-title{font-size:34px}
-}
-@media (max-width:680px){
-  body{padding:18px}
-  .viewport{height:560px;padding:16px}
-  .gmv-card{min-height:340px;padding:16px;gap:12px}
-  .icon-cont{width:64px;height:64px}
-  .about-title{font-size:24px}
-  .team-grid{grid-template-columns:1fr}
-  .avatar{width:100px;height:100px}
-}
-@media (prefers-reduced-motion:reduce){
-  .vtrack{transition:none}
-  .gmv-card, .member, .hero-art, .avatar{transition:none}
-  .avatar::after{display:none}
-}
-  
-</style>
-
-
+  /* responsive */
+  @media (max-width:1100px){
+    .hero{flex-direction:column;align-items:flex-start;padding:28px}
+    .hero-art{width:100%;height:200px}
+    .viewport{max-width:100%;height:500px}
+    .gmv-card{min-height:320px;padding:20px;gap:18px}
+    .icon-cont{width:78px;height:78px}
+    .team-grid{grid-template-columns:repeat(2,1fr)}
+    .avatar{width:120px;height:120px}
+    .about-title{font-size:34px}
+    /* scale down GMV text on narrower viewports */
+    .gmv-title{font-size:30px}
+    .gmv-card p{font-size:16px}
+  }
+  @media (max-width:680px){
+    body{padding:18px}
+    .viewport{height:560px;padding:16px}
+    .gmv-card{min-height:340px;padding:16px;gap:12px}
+    .icon-cont{width:64px;height:64px}
+    .about-title{font-size:24px}
+    .team-grid{grid-template-columns:1fr}
+    .avatar{width:100px;height:100px}
+    /* mobile size adjustments to avoid overflow */
+    .gmv-title{font-size:24px}
+    .gmv-card p{font-size:15px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .vtrack{transition:none}
+    .gmv-card, .member, .hero-art, .avatar{transition:none}
+    .avatar::after{display:none}
+  }
+      input.avatar-input{display:none}
+  </style>
 </head>
 <body>
   <div class="wrap" id="page">
+    <!-- Header (loaded from Banner's Header.html) -->
+    <div id="header-container"></div>
+    <script>
+    async function loadHtmlWithScripts(url, containerSelector) {
+      try{
+        const res = await fetch(url, { cache: 'no-store' });
+        if (!res.ok) throw new Error('Failed to load ' + url + ' — ' + res.status);
+        const text = await res.text();
+
+        const temp = document.createElement('div');
+        temp.innerHTML = text;
+
+        const container = document.querySelector(containerSelector);
+        if (!container) throw new Error('Container not found: ' + containerSelector);
+
+        const scripts = [];
+        Array.from(temp.childNodes).forEach(node => {
+          if (node.tagName && node.tagName.toLowerCase() === 'script') {
+            scripts.push(node);
+          } else {
+            container.appendChild(node);
+          }
+        });
+
+        const nestedScripts = Array.from(container.querySelectorAll('script'));
+        nestedScripts.forEach(s => { const clone = s.cloneNode(true); scripts.push(clone); s.parentNode && s.parentNode.removeChild(s); });
+
+        for (const s of scripts) {
+          const src = s.getAttribute && s.getAttribute('src');
+          const type = s.getAttribute && s.getAttribute('type');
+          if (src) {
+            await new Promise((resolve, reject) => {
+              const ext = document.createElement('script');
+              if (type) ext.type = type;
+              ext.src = src;
+              ext.async = false;
+              ext.onload = resolve;
+              ext.onerror = () => reject(new Error('Failed to load script: ' + src));
+              document.head.appendChild(ext);
+            });
+          } else {
+            const inline = document.createElement('script');
+            if (type) inline.type = type;
+            inline.text = s.textContent || s.innerText || '';
+            document.body.appendChild(inline);
+            inline.remove();
+          }
+        }
+      }catch(e){ console.error(e); }
+    }
+    // load header.html from banner project into this page
+    loadHtmlWithScripts('Header.html', '#header-container').catch(console.error);
+    </script>
+
     <div class="topbar" role="banner" aria-label="topbar">
       <div class="brand">
-        <div class="logo" aria-hidden="true">AL</div>
+        
         <div>
-          <h4>AirLytic</h4>
+          
           <div style="font-size:12px;color:var(--muted)">Air Quality Insights</div>
         </div>
       </div>
@@ -161,39 +220,54 @@
     <!-- Intro -->
     <section class="intro" aria-label="intro-lead">
       <h2>Innovative Software Solutions for the Future</h2>
-      <p>We build robust analytics and visualizations for air quality — turning sensor readings into clear, actionable insights for communities and decision-makers.</p>
+      <p>We build robust analytics and visualizations for air quality turning sensor readings into clear, actionable insights for communities and decision-makers.</p>
     </section>
 
-    <!-- GMV -->
-    <section class="gmv" aria-label="Goals Mission Vision">
-      <div class="viewport" id="gmvViewport" tabindex="0" aria-roledescription="carousel" aria-label="Goals Mission Vision">
-        <div class="vtrack" id="vtrack" role="group" aria-label="Goals, mission and vision slides">
-          <article id="slide-0" class="gmv-card" aria-labelledby="g-title" data-idx="0" tabindex="0">
-            <div class="icon-cont" aria-hidden="true">G</div>
-            <div>
-              <h3 id="g-title">Goals</h3>
-              <p>Deliver transparent, reliable air quality products that empower users and communities with timely insights and clear actions. We aim for clarity, accuracy, and accessibility in every dashboard and report.</p>
-            </div>
-          </article>
+<!-- GMV -->
+<section class="gmv" aria-label="Goals Mission Vision">
+  <div class="viewport" id="gmvViewport" tabindex="0" aria-roledescription="carousel" aria-label="Goals Mission Vision">
+    <div class="vtrack" id="vtrack" role="group" aria-label="Goals, mission and vision slides">
 
-          <article id="slide-1" class="gmv-card" aria-labelledby="m-title" data-idx="1" tabindex="0">
-            <div class="icon-cont" aria-hidden="true">M</div>
-            <div>
-              <h3 id="m-title">Mission</h3>
-              <p>To democratize air quality information using data, AI, and beautiful visual experiences so people can breathe smarter and live healthier. We prioritize trustworthy models and human-centered design.</p>
-            </div>
-          </article>
+      <article id="slide-0" class="gmv-card" aria-labelledby="g-title" data-idx="0" tabindex="0">
+        <h1 id="g-title" class="gmv-title">Goals</h1>
+        <p>Deliver transparent, reliable air quality products that empower users and communities with timely insights and clear actions. We aim for clarity, accuracy, and accessibility in every dashboard and report.</p>
+        <p style="margin:8px 0 0;color:var(--muted);line-height:1.45;font-size:16px">Key objectives:</p>
+        <ul style="margin:8px 0 0;color:var(--muted);line-height:1.45;font-size:16px">
+          <li>Provide real-time, locally-relevant sensor data with clear uncertainty bounds.</li>
+          <li>Make air-quality knowledge accessible through plain-language explanations and visual storytelling.</li>
+          <li>Support community action by surfacing health-relevant thresholds and suggested responses.</li>
+          <li>Maintain high data integrity through automated QA and model validation.</li>
+        </ul>
+      </article>
 
-          <article id="slide-2" class="gmv-card" aria-labelledby="v-title" data-idx="2" tabindex="0">
-            <div class="icon-cont" aria-hidden="true">V</div>
-            <div>
-              <h3 id="v-title">Vision</h3>
-              <p>A world where communities have accessible environmental intelligence — leading to cleaner air, healthier lives, and better policies. We want data to be a catalyst for positive change.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
+      <article id="slide-1" class="gmv-card" aria-labelledby="m-title" data-idx="1" tabindex="0">
+        <h3 id="m-title" class="gmv-title">Mission</h3>
+        <p>To democratize air quality information using data, AI, and beautiful visual experiences so people can breathe smarter and live healthier. We prioritize trustworthy models and human-centered design.</p>
+        <p style="margin:8px 0 0;color:var(--muted);line-height:1.45;font-size:16px">How we do it:</p>
+        <ul style="margin:8px 0 0;color:var(--muted);line-height:1.45;font-size:16px">
+          <li>Partner with local communities and researchers to co-design meaningful metrics and UX.</li>
+          <li>Combine low-cost sensor networks with rigorous calibration and machine learning to increase coverage and accuracy.</li>
+          <li>Deliver tools for different audiences — residents, health workers, and policymakers — tailored to their decisions and needs.</li>
+          <li>Operate transparently: publish methods, allow data export, and document model limitations clearly.</li>
+        </ul>
+      </article>
+
+      <article id="slide-2" class="gmv-card" aria-labelledby="v-title" data-idx="2" tabindex="0">
+        <h3 id="v-title" class="gmv-title">Vision</h3>
+        <p>A world where communities have accessible environmental intelligence — leading to cleaner air, healthier lives, and better policies. We want data to be a catalyst for positive change.</p>
+        <p style="margin:8px 0 0;color:var(--muted);line-height:1.45;font-size:16px">Long-term aspirations:</p>
+        <ul style="margin:8px 0 0;color:var(--muted);line-height:1.45;font-size:16px">
+          <li>Every neighborhood can monitor its air, understand trends, and take action to reduce exposures.</li>
+          <li>Policymakers use timely, hyperlocal evidence to prioritize interventions and measure progress.</li>
+          <li>Communities are empowered with educational resources that translate data into practical health guidance.</li>
+          <li>Open collaboration across science, civic tech, and public health leads to measurable improvements in air quality and population health.</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
 
     <!-- Team -->
     <section class="team" aria-label="Our Dedicated Team">
@@ -203,8 +277,9 @@
         <div class="member" role="listitem" data-member="0" data-initials="NV">
           <input class="avatar-input" id="avatarInput-0" type="file" accept="image/*" aria-label="Upload photo for Nove">
           <div class="avatar" tabindex="0" role="button" aria-label="Upload or change photo for Nove" data-input="avatarInput-0" title="Nove">
-            NV
-            <div class="camera" aria-hidden="true">📷</div>
+            <!-- default placeholder image for Nove -->
+            <img src="nv.png" alt="Nove" />
+            <div class="camera" aria-hidden="true"></div>
             <div class="remove-btn" aria-hidden="true" title="Remove photo">✕</div>
           </div>
           <h4>Nove</h4>
@@ -216,8 +291,9 @@
         <div class="member" role="listitem" data-member="1" data-initials="SV">
           <input class="avatar-input" id="avatarInput-1" type="file" accept="image/*" aria-label="Upload photo for Salve">
           <div class="avatar" tabindex="0" role="button" aria-label="Upload or change photo for Salve" data-input="avatarInput-1" title="Salve">
-            SV
-            <div class="camera" aria-hidden="true">📷</div>
+            <!-- default placeholder image for Salve -->
+            <img src="salve.png" alt="Salve" />
+            <div class="camera" aria-hidden="true"></div>
             <div class="remove-btn" aria-hidden="true" title="Remove photo">✕</div>
           </div>
           <h4>Salve</h4>
@@ -229,8 +305,9 @@
         <div class="member" role="listitem" data-member="2" data-initials="TR">
           <input class="avatar-input" id="avatarInput-2" type="file" accept="image/*" aria-label="Upload photo for Trisha">
           <div class="avatar" tabindex="0" role="button" aria-label="Upload or change photo for Trisha" data-input="avatarInput-2" title="Trisha">
-            TR
-            <div class="camera" aria-hidden="true">📷</div>
+            <!-- default placeholder image for Trisha -->
+            <img src="trish.png" alt="Trisha" />
+            <div class="camera" aria-hidden="true"></div>
             <div class="remove-btn" aria-hidden="true" title="Remove photo">✕</div>
           </div>
           <h4>Trisha</h4>
@@ -265,7 +342,7 @@
         avatarEl.innerHTML = ''; // clear contents (initials, overlays)
         const img = document.createElement('img');
         img.src = dataURL;
-        img.alt = avatarEl.getAttribute('sal') || 'Team photo';
+        img.alt = avatarEl.title || 'Team photo';
         avatarEl.appendChild(img);
 
         // camera & remove overlays
@@ -280,6 +357,13 @@
           const stored = localStorage.getItem(key);
           if(stored){
             setAvatarFromDataURL(avatarEl, stored);
+            // make sure remove is visible
+            const rem = avatarEl.querySelector('.remove-btn'); if(rem){ rem.style.opacity = '1.0'; rem.style.pointerEvents = 'auto'; }
+          } else if(avatarEl.querySelector('img')){
+            // already has a provided image in the HTML — keep it and ensure overlays are present
+            const cam = avatarEl.querySelector('.camera') || (()=>{ const d=document.createElement('div'); d.className='camera'; d.setAttribute('aria-hidden','true'); d.textContent='📷'; avatarEl.appendChild(d); return d; })();
+            const rem = avatarEl.querySelector('.remove-btn') || (()=>{ const d=document.createElement('div'); d.className='remove-btn'; d.setAttribute('aria-hidden','true'); d.textContent='✕'; avatarEl.appendChild(d); return d; })();
+            rem.style.opacity = '1.0'; rem.style.pointerEvents = 'auto';
           } else {
             // ensure initial letters and overlays present
             const initials = avatarEl.parentElement.getAttribute('data-initials') || avatarEl.title.slice(0,2).toUpperCase();
@@ -296,9 +380,8 @@
       memberEls.forEach((memberEl, idx) => {
         const avatar = memberEl.querySelector('.avatar');
         const input = memberEl.querySelector('.avatar-input');
-        const removeBtn = avatar.querySelector('.remove-btn');
 
-        // restore any stored photo
+        // restore any stored photo or keep the provided placeholder image
         restoreAvatar(idx, avatar);
 
         // helpers

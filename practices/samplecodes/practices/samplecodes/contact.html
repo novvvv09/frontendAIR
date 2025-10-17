@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contact — AirLytic</title>
-
+  <title>Contact Us</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
   <!-- icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         integrity="sha512-7H9Wj6E5uUmtzBr8hjq3bE9U8uwgLM1u9bXEdqjhvTTscMRB1jW+E9by7D5cXv8Ht0szzUASoHK3IuA6hC/9+w=="
@@ -13,12 +13,14 @@
   <style>
     :root{
       --brand:#2b7fff;
-      --navy:#0f2a57;
+      --navy:#06223b;             /* deep navy for dark cards on hover */
       --muted:#6b7280;
       --card-bg:#fff;
-      --radius:14px;
+      --radius:12px;
       --shadow: 0 10px 30px rgba(11,34,71,0.08);
       --max-width:1180px;
+      --accent:#f59e0b;           /* orange send button like image */
+      --card-hover-accent: #ffb86b; /* icon color on hover */
     }
     *{box-sizing:border-box}
     body{
@@ -27,21 +29,23 @@
       background: linear-gradient(180deg,#fbfdff 0%, #f7fbff 100%);
       -webkit-font-smoothing:antialiased;
       line-height:1.45;
+      -webkit-font-smoothing:antialiased;
     }
 
-    /* Keep a header-container where Header.html will be injected */
+    /* Header injection container */
     #header-container{width:100%}
 
-    /* Hero / contact top (no Request A Demo here) */
+    /* Hero top — increased top spacing so title is clearly visible beneath header */
     .hero-top {
-      background: linear-gradient(180deg,#0b1a2a 0%, #06223b 100%);
+      background: linear-gradient(180deg,#2b90fc 0%, #1f34d5 100%);
       color:#fff;
+      /* ---- CHANGED: bigger top spacing & padding so title is visible ---- */
+      margin-top: 36px;
       padding: 48px 20px 28px;
+      /* ---------------------------------------------------------------- */
       text-align: center;
-
-      /* ---- ADDED: small space between header and title ---- */
-      margin-top: 12px;
-      /* ---------------------------------------------------- */
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
     }
     .hero-top .container { max-width: var(--max-width); margin: 0 auto; }
     .hero-top h1 { font-size:2rem; margin:0 0 8px; font-weight:800; }
@@ -54,64 +58,152 @@
     .hero-card p{ margin:0 0 12px; color:rgba(255,255,255,0.78) }
     .hero-card .card-cta { padding:8px 12px; border-radius:999px; background:var(--brand); color:#fff; text-decoration:none; font-weight:700; }
 
-    /* Contact cards row */
+    /* Contact summary cards row (white boxes + hover/focus animation) */
     .cards{
       max-width:var(--max-width);
-      margin: 8px auto 32px;
+      margin: 18px auto 28px;
       display:grid;
       grid-template-columns: repeat(4,1fr);
       gap:18px;
       padding: 0 20px;
     }
     .card{
-      background:var(--card-bg);
+      background:var(--card-bg);               /* white by default per your request */
       border-radius:12px;
       padding:18px;
       box-shadow:var(--shadow);
       display:flex;
       gap:14px;
-      align-items:flex-start;
-      transition:transform .22s ease, box-shadow .22s ease;
-    }
-    .card .icon{
-      flex:0 0 56px;
-      height:56px;
-      width:56px;
-      border-radius:10px;
-      background:linear-gradient(180deg, rgba(43,127,255,0.12), rgba(43,127,255,0.04));
-      display:grid; place-items:center;
-      color:var(--brand);
-      font-size:20px;
+      align-items:center;
+      transition:
+        transform .22s cubic-bezier(.2,.9,.3,1),
+        box-shadow .22s ease,
+        background-color .28s ease,
+        color .22s ease;
+      min-height:96px;
+      cursor:default;
+      outline: none;
     }
 
-    /* Main layout */
+    /* make cards keyboard-focusable */
+    .card:focus {
+      box-shadow: 0 14px 40px rgba(2,8,36,0.14);
+      transform: translateY(-6px);
+    }
+
+    /* subtle lift on hover and color switch to navy with white text/icon */
+    .card:hover,
+    .card:focus,
+    .card:focus-within {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(2,8,36,0.18);
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .card .icon{
+      flex:0 0 64px;
+      height:64px;
+      width:64px;
+      border-radius:10px;
+      display:grid; place-items:center;
+      font-size:20px;
+      background: linear-gradient(180deg, rgba(43,127,255,0.08), rgba(43,127,255,0.02));
+      color:var(--brand);
+      box-shadow: 0 6px 18px rgba(11,34,71,0.06);
+      transition: transform .22s ease, background .22s ease, color .22s ease;
+    }
+
+    /* Change icon background and icon color when card is hovered/focused */
+    .card:hover .icon,
+    .card:focus .icon,
+    .card:focus-within .icon {
+      background: linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.02));
+      color: var(--card-hover-accent);
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.16);
+    }
+
+    .card h4{ margin:0 0 6px; font-size:1rem; transition: color .22s ease; }
+    .card p{ margin:0; color:var(--muted); font-size:0.95rem; line-height:1.25; transition: color .22s ease; }
+
+    /* ensure text turns white on hover */
+    .card:hover h4,
+    .card:focus h4,
+    .card:hover p,
+    .card:focus p,
+    .card:focus-within p {
+      color: #fff;
+    }
+
+    /* Main layout: map + form */
     .main{
       max-width:var(--max-width);
-      margin: 20px auto 80px;
+      margin: 12px auto 80px;
       padding: 20px;
       display:grid;
-      grid-template-columns: 1fr 440px;
+      grid-template-columns: 1fr 480px; /* larger left map and narrower form like image */
       gap:28px;
       align-items:start;
     }
-    .map-wrap{ background:var(--card-bg); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; min-height:360px; }
-    .map-iframe{ border:0; width:100%; height:100%; min-height:360px; }
-    .contact-form{ background:var(--card-bg); padding:22px; border-radius:var(--radius); box-shadow:var(--shadow); }
-    .btn{ display:inline-block; padding:12px 18px; border-radius:10px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; border:0; cursor:pointer; box-shadow:0 10px 28px rgba(43,127,255,0.12); }
+    .map-wrap{ background:var(--card-bg); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; min-height:420px; display:flex; flex-direction:column; }
+    .map-top{ padding:14px 18px; border-bottom:1px solid #eef3f7; display:flex; justify-content:space-between; align-items:center; gap:12px; background:#fff; }
+    .map-iframe{ border:0; width:100%; height:100%; min-height:360px; display:block; }
+
+    /* Contact form card on the right */
+    .contact-form{ background:var(--card-bg); padding:28px; border-radius:var(--radius); box-shadow:var(--shadow); display:flex; flex-direction:column; justify-content:space-between; min-height:420px; }
+    .contact-form h3{ margin:0 0 6px; font-size:1.15rem; }
+    .contact-form p.lead{ margin:0 0 14px; color:var(--muted); font-size:0.95rem; }
+
+    /* Form fields */
+    .contact-form label{ display:block; font-size:0.85rem; margin-bottom:6px; color:#374151; }
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form textarea{
+      width:100%;
+      padding:12px 14px;
+      border-radius:8px;
+      border:1px solid #e6eef6;
+      font-size:0.95rem;
+      background: #fff;
+      resize:vertical;
+      box-shadow: inset 0 1px 0 rgba(16,24,40,0.02);
+    }
+    .contact-form textarea{ min-height:120px; }
+
+    .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+
+    .btn{
+      display:inline-block;
+      padding:12px 20px;
+      border-radius:28px;
+      background:var(--accent);
+      color:#fff;
+      font-weight:700;
+      text-decoration:none;
+      border:0;
+      cursor:pointer;
+      box-shadow: 0 8px 24px rgba(245,158,11,0.12);
+    }
+
+    .contact-form .meta{ font-size:0.9rem; color:var(--muted); margin-left:10px; }
 
     /* Footer */
     footer.footer{ margin-top:60px; padding:40px 20px; background:#08162f; color:#cfe3ff; }
     footer .wrap{ max-width:var(--max-width); margin:0 auto; display:flex; gap:24px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap }
     .copyright{ max-width:var(--max-width); margin:18px auto 40px; text-align:center; color:rgba(255,255,255,0.55); font-size:0.88rem }
 
-    /* responsive */
+    /* Responsive */
     @media (max-width:980px){
       .hero-cards{ grid-template-columns:1fr }
       .cards{ grid-template-columns: repeat(2,1fr) }
       .main{ grid-template-columns:1fr; padding:20px }
+      .map-wrap{ min-height:320px }
+      .contact-form{ min-height: auto }
     }
     @media (max-width:480px){
-      nav.main-nav a span { display:none; }
+      .form-row{ grid-template-columns:1fr; }
+      .card .icon{ flex:0 0 48px; height:48px; width:48px; font-size:18px; }
     }
 
     /* toast */
@@ -181,32 +273,32 @@
     loadHtmlWithScripts('Header.html', '#header-container').catch(console.error);
   </script>
 
-  <!-- Hero top (now without Request A Demo) -->
+  <!-- Hero top -->
   <section class="hero-top" role="region" aria-labelledby="contact-heading">
     <div class="container">
-      <h1 id="contact-heading">Contact AirLytic</h1>
+      <h1 id="contact-heading">Get in touch with AirLytic</h1>
       <p>See the invisible. Understand your air and reach out for support, partnerships, or data inquiries.</p>
 
-      <!-- (Request A Demo removed here) -->
       <div style="height:10px;"></div>
 
       <div class="hero-cards" role="list" aria-label="Contact options">
         <div class="hero-card" role="listitem">
           <h3>Sales</h3>
           <p>Wondering if AirLytic is the right tool for your team? Chat with our sales team to see if there’s a fit.</p>
-          <a class="card-cta" href="mailto:sales@airlytic.com?subject=Sales%20Inquiry">Let's Chat</a>
+          
+          
         </div>
 
         <div class="hero-card" role="listitem">
           <h3>Support</h3>
           <p>Need a hand using AirLytic or managing your account? Get in touch with our support team.</p>
-          <a class="card-cta" href="mailto:support@airlytic.com?subject=Support%20Request">Get Support</a>
+         
         </div>
 
         <div class="hero-card" role="listitem">
           <h3>Partnerships</h3>
           <p>We’re open to co-marketing with awesome partners. Drop us a note and our Partnerships team will circle back.</p>
-          <a class="card-cta" href="mailto:partners@airlytic.com?subject=Partnership%20Inquiry">Get In Touch</a>
+          
         </div>
       </div>
     </div>
@@ -214,101 +306,111 @@
 
   <!-- Contact summary cards -->
   <section class="cards" aria-label="Contact information">
-    <div class="card" role="article">
-      <div class="icon" aria-hidden="true"><i class="fas fa-map-marker-alt"></i></div>
+    <div class="card" role="article" tabindex="0">
+     
       <div>
-        <h4>Our Location</h4>
-        <p>Tagum City, Davao del Norte<br>Philippines</p>
+        <i class="fa-solid fa-location-dot" style="color: #1f43d5;"></i><h4>Our Location</h4>
+        <p>Visayan Village<br><small style="opacity:.9">Tagum City, Philippines</small></p>
       </div>
     </div>
 
-    <div class="card" role="article">
-      <div class="icon" aria-hidden="true"><i class="fas fa-phone"></i></div>
+    <div class="card" role="article" tabindex="0">
+      
       <div>
-        <h4>Phone Number</h4>
-        <p>+63 917 123 4567<br><small style="color:var(--muted)">Mon — Fri, 9:00 — 17:00</small></p>
+        <i class="fa-solid fa-phone" style="color: #1f34d5;"></i></i> Phone Number</h4>
+        <p>(+021) 250-365<br><small style="color:var(--muted)">Mon — Fri, 9:00 — 17:00</small></p>
       </div>
     </div>
 
-    <div class="card" role="article">
-      <div class="icon" aria-hidden="true"><i class="fas fa-envelope"></i></div>
+    <div class="card" role="article" tabindex="0">
+      
       <div>
-        <h4>Email Us</h4>
-        <p>support@airlytic.com<br><small style="color:var(--muted)">Expect reply within 1–2 business days</small></p>
+        <i class="fa-solid fa-envelope fa-flip-horizontal" style="color: #1f34d5;"></i><h4>Email Us</h4>
+        <p>support@Airlytic.com<br><small style="opacity:.9">Expect reply within 1–2 business days</small></p>
       </div>
     </div>
 
-    <div class="card" role="article">
-      <div class="icon" aria-hidden="true"><i class="fas fa-clock"></i></div>
+    <div class="card" role="article" tabindex="0">
+      
       <div>
-        <h4>Working Hours</h4>
-        <p>Mon — Sat • 9:00 — 17:00<br>Sunday — Emergency support only</p>
+        <i class="fa-solid fa-business-time" style="color: #1f43d5;"></i><h4>Working Hours</h4>
+        <p>Mon — Sat • 9:00 — 17:00<br><small style="color:var(--muted)">Sunday: Emergency support only</small></p>
       </div>
     </div>
   </section>
 
   <!-- Map + Contact Form -->
   <main class="main" aria-live="polite">
+
+    <!-- Map -->
     <div class="map-wrap" aria-label="Map showing AirLytic location">
-      <div class="map-top" style="padding:14px 18px; border-bottom:1px solid #f1f5f9;">
+      <div class="map-top">
         <div>
-          <strong>AirLytic (Tagum)</strong>
-          <div style="font-size:0.9rem; color:var(--muted)">Tagum City, Davao del Norte, Philippines</div>
+          <strong>AirLytic</strong>
+          <div style="font-size:0.9rem; color:var(--muted); margin-top:4px;">UM Visayan village, Tagum City</div>
         </div>
-        <div style="font-size:0.9rem; color:var(--muted)"><i class="fas fa-map-pin"></i> View on map</div>
+        <div style="font-size:0.9rem; color:var(--muted);"><i class="fas fa-map-pin"></i> View on map</div>
       </div>
 
       <iframe class="map-iframe"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31897.726057282743!2d125.7863!3d7.4478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32f91db1e2f0bbf3%3A0x9d4f27e1472a5545!2sTagum%20City%2C%20Davao%20del%20Norte!5e0!3m2!1sen!2sph!4v1697000000000!5m2!1sen!2sph"
-              loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="AirLytic location map - Tagum City"></iframe>
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="AirLytic location map"
+              style="border:0; width:100%; flex:1;"></iframe>
     </div>
 
+    <!-- Contact Form -->
     <aside class="contact-form" aria-labelledby="contact-form-heading">
-      <h3 id="contact-form-heading">Send us a message</h3>
-      <p>Have a question about data, partnerships, or API access? Drop a note — we'll get back to you soon.</p>
+      <div>
+        <h3 id="contact-form-heading">Send us a message</h3>
+        <p class="lead">Have a question about data, partnerships, or API access? Drop a note — we'll get back to you soon.</p>
 
-      <form id="contactForm" novalidate>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
-          <div>
-            <label for="name">Your name</label>
-            <input id="name" name="name" type="text" autocomplete="name" placeholder="Jane Doe" required>
+        <form id="contactForm" novalidate>
+          <div class="form-row">
+            <div>
+              <label for="name">Your name</label>
+              <input id="name" name="name" type="text" autocomplete="name" placeholder="Jane Doe" required>
+            </div>
+            <div>
+              <label for="email">Email address</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="you@domain.com" required>
+            </div>
           </div>
-          <div>
-            <label for="email">Email address</label>
-            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@domain.com" required>
+
+          <div style="margin-bottom:12px;">
+            <label for="subject">Subject</label>
+            <input id="subject" name="subject" type="text" placeholder="Partnership / API / Support" required>
           </div>
-        </div>
 
-        <div style="margin-bottom:12px;">
-          <label for="subject">Subject</label>
-          <input id="subject" name="subject" type="text" placeholder="Partnership / API / Support" required>
-        </div>
+          <div style="margin-bottom:12px;">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us about your project or question..." required></textarea>
+          </div>
 
-        <div style="margin-bottom:12px;">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="Tell us about your project or question..." required></textarea>
-        </div>
-
-        <div style="display:flex; gap:12px; align-items:center; margin-top:8px;">
-          <button type="submit" class="btn" aria-live="polite">Send message</button>
-          <div style="font-size:0.88rem; color:var(--muted)">Or email <a href="mailto:support@airlytic.com">support@airlytic.com</a></div>
-        </div>
-      </form>
+          <div style="display:flex; gap:12px; align-items:center; margin-top:8px;">
+            <button type="submit" class="btn" aria-live="polite">SEND MESSAGE</button>
+            <div class="meta">
+              Or email <a href="mailto:support@domain.com">support@AirLytic.com</a>
+            </div>
+          </div>
+        </form>
+      </div>
     </aside>
   </main>
 
   <!-- Floating quick actions -->
   <div style="position:fixed; right:18px; bottom:18px; display:flex; flex-direction:column; gap:10px; z-index:1200;">
     <a style="background:var(--brand); color:#fff; width:56px; height:56px; border-radius:50%; display:grid; place-items:center; text-decoration:none;" href="tel:+639171234567" title="Call AirLytic"><i class="fas fa-phone"></i></a>
-    <button id="openChat" style="background:#0f2a57; color:#fff; width:48px; height:48px; border-radius:50%; border:0;"><i class="fas fa-comments"></i></button>
+    <button id="openChat" style="background:#2269e5; color:#fff; width:48px; height:48px; border-radius:50%; border:0;"><i class="fas fa-comments"></i></button>
   </div>
 
   <!-- Footer -->
   <footer class="footer" role="contentinfo">
-    <div class="wrap" style="max-width:var(--max-width); margin:0 auto; display:flex; gap:24px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;">
+    <div class="wrap">
       <div>
         <img src="air.png" alt="AirLytic logo" style="height:40px; display:block; margin-bottom:8px">
-        <p style="color:#cfe3ff">AirLytic — real-time air quality insights, personalized recommendations, and easy-to-use data tools.</p>
+        <p style="color:#cfe3ff">AirLytic  real-time air quality insights, personalized recommendations, and easy-to-use data tools.</p>
       </div>
       <div>
         <h4 style="color:#cfe3ff">Company</h4>
@@ -328,8 +430,7 @@
     // footer year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // loadHeader already called above; (Header.html injects nav)
-    // client-side form handling
+    // client-side form handling (keeps your previous behavior)
     (function(){
       const form = document.getElementById('contactForm');
       const toast = document.getElementById('toast');
